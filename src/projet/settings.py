@@ -91,7 +91,7 @@ WSGI_APPLICATION = 'projet.wsgi.application'
 DATABASES = {
     'default': {
          'ENGINE': 'django.db.backends.postgresql',
-        'NAME':'logiciel',
+        'NAME':'gestion',
         'USER': 'abdin',
         'PASSWORD':'admin123',
         'HOST':'localhost',
@@ -117,7 +117,8 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
+#ici on specifie que la classe user à utiliser est Intervenant
+AUTH_USER_MODEL = "authentication.Intervenant"
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
