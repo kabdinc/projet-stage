@@ -10,4 +10,4 @@ class Intervenant(models.Model):
     nom_inter = models.CharField(max_length=50)
     prenoms_inter = models.CharField(max_length=150)
     nom_utilisateur = models.CharField(max_length=50,blank=False)
-    mot_de_passe = models.CharField(max_length=15,blank=False)
+    mot_de_passe = models.CharField(max_length=200,blank=False)
