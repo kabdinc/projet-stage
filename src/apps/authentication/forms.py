@@ -5,7 +5,12 @@ Copyright (c) 2019 - present AppSeed.us
 
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
+
+"""vu que nous utilisons intervenant comme reference de user par defaut il faudrait spécifier
+dans le form que nos utiliserons notre propre model d'ou l'importation de cette fonction 
+"""
+from django.contrib.auth import get_user_model
+#from django.contrib.auth.models import User
 
 
 class LoginForm(forms.Form):
@@ -54,9 +59,9 @@ class SignUpForm(UserCreationForm):
                 "class": "form-control"
             }
         ))
-
+    #ici  on viens le definir
     class Meta:
-        model = User
+        model = get_user_model()
         fields = ('username', 'email', 'password1', 'password2')
         
         
