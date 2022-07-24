@@ -28,6 +28,7 @@ def login_view(request):
             #si c'est un superuser il regirige vers la page admin de django
             #sinon il le redirige vers le view en question
             user = authenticate(username=username, password=password)
+            #ces lignes de code nous permettent de differencier les differentes vues en fonction des roles
             try:
                 tout_privillege =Intervenant.objects.filter(username=username).values_list("type_user",flat=True)
                 print(tout_privillege)
