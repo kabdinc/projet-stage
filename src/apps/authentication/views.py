@@ -4,11 +4,12 @@ Copyright (c) 2019 - present AppSeed.us
 """
 
 # Create your views here.
+import re
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
-from sympy import total_degree 
+#from sympy import total_degree 
 from .forms import LoginForm, SignUpForm
 from apps.authentication.models import Type_user, Intervenant
 
@@ -38,8 +39,8 @@ def login_view(request):
                 if len(tout_privillege) < 2:
                     if tout_privillege[0]== 1:
                         login(request, user)
-                        return HttpResponse("c'est la vue Directeur d'etude")
-                        #return redirect("/admin")
+                        #return HttpResponse("c'est la vue Directeur d'etude")
+                        return redirect("/directeur_etude/")
 
                     elif tout_privillege[0]== 2:
                         login(request, user)
@@ -48,8 +49,8 @@ def login_view(request):
 
                     elif tout_privillege[0]== 3:
                         login(request, user)
-                        return HttpResponse("c'est la vue Directeur général")
-                        #return redirect("/admin")
+                        #return HttpResponse("c'est la vue Directeur général")
+                        return redirect("/direct_etude_ens/")
 
                     elif tout_privillege[0]== 4:
                         login(request, user)
@@ -126,3 +127,4 @@ def register_user(request):
         form = SignUpForm()
 
     return render(request, "accounts/register.html", {"form": form, "msg": msg, "success": success})
+
