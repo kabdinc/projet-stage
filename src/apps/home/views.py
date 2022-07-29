@@ -11,7 +11,7 @@ from django.template import loader
 from django.urls import reverse
 
 
-#@login_required(login_url="/login/")
+@login_required(login_url="/login/")
 def index(request):
     context = {'segment': 'index'}
 
@@ -44,13 +44,17 @@ def pages(request):
         html_template = loader.get_template('home/page-500.html')
         return HttpResponse(html_template.render(context, request))
 
+
 def direct_etude_view(request):
      html_templat = loader.get_template('accounts/register.html')
      return render(request,html_templat,context={})
 
+#sur la classe qui va sortir chaque page html on devra mettre un login required et ensuite specifier la page a creer dans le render
+#pur le context on pourra ajouter les variable qu'on voudra exporter apres 
+@login_required(login_url="/login/")
 def direct_etude_ens_view(request):
      html_template = loader.get_template('home/index.html')
-     return render(request,html_template,context={})
+     return render(request,"home/index.html",context={})
   
 def secretaire_view(request):
      html_template = loader.get_template('home/index.html')

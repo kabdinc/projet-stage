@@ -75,8 +75,10 @@ def login_view(request):
                 else:
                     if 1 in tout_privillege:
                         login(request, user)
-                        return HttpResponse("c'est la vue DE et enseignant")
-                        #return redirect("/admin")
+                        #return HttpResponse("c'est la vue DE et enseignant")
+                        #testons la sortie de la vue avec cette methode de enseignant 
+                        #direct_etude_ens_view est une classe qui se retrouve au noveau de home 
+                        return redirect("/direct_etude_ens_view")
                     elif 2 in tout_privillege:
                         login(request, user)
                         return HttpResponse("c'est la vue Secretaire et enseignant")
@@ -95,6 +97,7 @@ def login_view(request):
                         #return redirect("/admin")
             else:
                 msg = 'Invalid credentials'
+
         else:
             msg = 'Error validating the form'
 
