@@ -44,7 +44,7 @@ def pages(request):
         html_template = loader.get_template('home/page-500.html')
         return HttpResponse(html_template.render(context, request))
 
-
+@login_required(login_url="/login/")
 def direct_etude_view(request):
      html_templat = loader.get_template('accounts/register.html')
      return render(request,html_templat,context={})
@@ -55,43 +55,53 @@ def direct_etude_view(request):
 def direct_etude_ens_view(request):
      html_template = loader.get_template('home/index.html')
      return render(request,"home/index.html",context={})
-  
+
+@login_required(login_url="/login/")  
 def secretaire_view(request):
-     html_template = loader.get_template('home/index.html')
-     return render(request,html_template,context={})
-  
+     html_template = loader.get_template('home/secretaire.html')
+     return render(request,"home/secretaire.html",context={})
+
+@login_required(login_url="/login/")  
 def secretaire_ens_view(request):
       html_template = loader.get_template('home/index.html')
-      return render(request,html_template,context={}) 
-  
+      return render(request,"home/index.html",context={}) 
+ 
+@login_required(login_url="/login/")  
 def direct_general_view(request):
       html_template = loader.get_template('home/index.html')
-      return render(request,html_template,context={})
+      return render(request,"home/index.html",context={})
 
+@login_required(login_url="/login/")
 def direct_general_ens_view(request):
      html_template = loader.get_template('home/index.html')
-     return render(request,html_template,context={}) 
-  
+     return render(request,"home/index.html",context={}) 
+
+@login_required(login_url="/login/")  
 def daf_view(request):
      html_template = loader.get_template('home/index.html')
-     return render(request,html_template,context={})
-  
+     return render(request,"home/index.html",context={})
+
+@login_required(login_url="/login/")  
 def daf_ens_view(request):
      html_template = loader.get_template('home/index.html')
-     return render(request,html_template,context={})
-  
+     return render(request,"home/index.html",context={})
+
+@login_required(login_url="/login/")  
 def administrateur_view(request):
      html_template = loader.get_template('home/index.html')
-     return render(request,html_template,context={})
-  
+     return render(request,"home/index.html",context={})
+
+@login_required(login_url="/login/")  
 def enseignant_view(request):
      html_template = loader.get_template('home/index.html')
-     return render(request,html_template,context={})  
-  
+     return render(request,"home/index.html",context={})  
+
+@login_required(login_url="/login/")  
 def comptable_view(request):
       html_template = loader.get_template('home/index.html')
-      return render(request,html_template,context={}) 
-  
+      return render(request,"home/index.html",context={}) 
+
+@login_required(login_url="/login/")  
 def comptable_ens_view(request):
       html_template = loader.get_template('home/index.html')
-      return render(request,html_template,context={}) 
+      return render(request,"home/index.html",context={}) 

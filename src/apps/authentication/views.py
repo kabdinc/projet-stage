@@ -44,33 +44,33 @@ def login_view(request):
 
                     elif tout_privillege[0]== 2:
                         login(request, user)
-                        return HttpResponse("c'est la vue Secretaire")
-                        #return redirect("/admin")
+                        #return HttpResponse("c'est la vue Secretaire")
+                        return redirect("/secretaire/")
 
                     elif tout_privillege[0]== 3:
                         login(request, user)
                         #return HttpResponse("c'est la vue Directeur général")
-                        return redirect("/direct_etude_ens/")
+                        return redirect("/direct_general/")
 
                     elif tout_privillege[0]== 4:
                         login(request, user)
-                        return HttpResponse("c'est la vue Enseignant")
-                        #return redirect("/admin")
+                        #return HttpResponse("c'est la vue Enseignant")
+                        return redirect("/enseignant/")
 
                     elif tout_privillege[0]== 5:
                         login(request, user)
-                        return HttpResponse("c'est la vue DAF")
-                        #return redirect("/admin")
+                        #return HttpResponse("c'est la vue DAF")
+                        return redirect("/daf/")
 
                     elif tout_privillege[0]== 6:
                         login(request, user)
-                        return HttpResponse("c'est la vue Adminstrateur")
-                        #return redirect("/admin")
+                        #return HttpResponse("c'est la vue Adminstrateur")
+                        return redirect("/admin")
 
                     elif tout_privillege[0]== 7:
                         login(request, user)
-                        return HttpResponse("c'est la vue Comptable")
-                        #return redirect("/admin")
+                        #return HttpResponse("c'est la vue Comptable")
+                        return redirect("/comptable/")
 
                 else:
                     if 1 in tout_privillege:
@@ -81,20 +81,20 @@ def login_view(request):
                         return redirect("/direct_etude_ens_view")
                     elif 2 in tout_privillege:
                         login(request, user)
-                        return HttpResponse("c'est la vue Secretaire et enseignant")
-                        #return redirect("/admin")
+                        #return HttpResponse("c'est la vue Secretaire et enseignant")
+                        return redirect("/secretaire_ens/")
                     elif 3 in tout_privillege:
                         login(request, user)
-                        return HttpResponse("c'est la vue DG et enseignant")
-                        #return redirect("/admin")
+                        #return HttpResponse("c'est la vue DG et enseignant")
+                        return redirect("/direct_general_ens/")
                     elif 5 in tout_privillege:
                         login(request, user)
-                        return HttpResponse("c'est la vue daf et enseignant")
-                        #return redirect("/admin")
+                        #return HttpResponse("c'est la vue daf et enseignant")
+                        return redirect("/daf_ens/")
                     elif 7 in tout_privillege:
                         login(request, user)
-                        return HttpResponse("c'est la vue Compta et enseignant")
-                        #return redirect("/admin")
+                        #return HttpResponse("c'est la vue Compta et enseignant")
+                        return redirect("/comptable_ens/")
             else:
                 msg = 'Invalid credentials'
 

@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 
-from apps.home.views import direct_etude_ens_view
+from apps.home.views import direct_etude_ens_view,direct_etude_view,comptable_ens_view,comptable_view,enseignant_view,administrateur_view,daf_ens_view,daf_view,direct_general_ens_view,direct_general_view,secretaire_ens_view,secretaire_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,7 +27,17 @@ urlpatterns = [
 
     #dans le urls.py de mon projet meme je vient creer mes liens en foncti de mes vues
     path("direct_etude_ens_view", direct_etude_ens_view, name="vue de_ens" ),
-
+    path("directeur_etude/", direct_etude_view, name="directeur_etude"),
+    path("comptable_ens/", comptable_ens_view, name="comptable_ens"),
+    path("comptable/", comptable_view, name="comptable"), 
+    path("enseignant/", enseignant_view, name="enseignant"), 
+    path("administrateur/", administrateur_view, name="administrateur"), 
+    path("daf_ens/", daf_ens_view, name="daf_ens"),
+    path("daf/",daf_view, name="daf"),
+    path("direct_general_ens/",direct_general_ens_view, name="direct_general_ens"), 
+    path("direct_general/",direct_general_view, name="direct_general"),
+    path("secretaire_ens/",secretaire_ens_view, name="secretaire_ens"),
+    path("secretaire/",secretaire_view, name="secretaire"),
     # Leave `Home.Urls` as last the last line
     path("", include("apps.home.urls"))
 ]
