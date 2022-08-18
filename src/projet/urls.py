@@ -26,7 +26,7 @@ urlpatterns = [
     # ADD NEW Routes HERE
 
     #dans le urls.py de mon projet meme je vient creer mes liens en foncti de mes vues
-    path("direct_etude_ens_view", direct_etude_ens_view, name="vue de_ens" ),
+    path("direct_etude_ens_view", direct_etude_ens_view, name="vue_de_ens" ),
     path("directeur_etude/", direct_etude_view, name="directeur_etude"),
     path("comptable_ens/", comptable_ens_view, name="comptable_ens"),
     path("comptable/", comptable_view, name="comptable"), 

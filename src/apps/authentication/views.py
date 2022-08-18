@@ -4,6 +4,7 @@ Copyright (c) 2019 - present AppSeed.us
 """
 
 # Create your views here.
+from multiprocessing import context
 import re
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -32,44 +33,52 @@ def login_view(request):
             #ces lignes de code nous permettent de differencier les differentes vues en fonction des roles
             try:
                 tout_privillege =Intervenant.objects.filter(username=username).values_list("type_user",flat=True)
-                print(tout_privillege)
+                vargetnom = Intervenant.objects.filter(username=username).values()[0]
             except Exception:
                 tout_privillege = None
+                vargetnom = None
             if user is not None and tout_privillege is not None:
                 if len(tout_privillege) < 2:
                     if tout_privillege[0]== 1:
                         login(request, user)
                         #return HttpResponse("c'est la vue Directeur d'etude")
+                        request.session['pseudo']=vargetnom["username"]
                         return redirect("/directeur_etude/")
 
                     elif tout_privillege[0]== 2:
                         login(request, user)
                         #return HttpResponse("c'est la vue Secretaire")
+                        request.session['pseudo']=vargetnom["username"]
                         return redirect("/secretaire/")
 
                     elif tout_privillege[0]== 3:
                         login(request, user)
                         #return HttpResponse("c'est la vue Directeur général")
+                        request.session['pseudo']=vargetnom["username"]
                         return redirect("/direct_general/")
 
                     elif tout_privillege[0]== 4:
                         login(request, user)
                         #return HttpResponse("c'est la vue Enseignant")
+                        request.session['pseudo']=vargetnom["username"]
                         return redirect("/enseignant/")
 
                     elif tout_privillege[0]== 5:
                         login(request, user)
                         #return HttpResponse("c'est la vue DAF")
+                        request.session['pseudo']=vargetnom["username"]
                         return redirect("/daf/")
 
                     elif tout_privillege[0]== 6:
                         login(request, user)
                         #return HttpResponse("c'est la vue Adminstrateur")
+                        request.session['pseudo']=vargetnom["username"]
                         return redirect("/admin")
 
                     elif tout_privillege[0]== 7:
                         login(request, user)
                         #return HttpResponse("c'est la vue Comptable")
+                        request.session['pseudo']=vargetnom["username"]
                         return redirect("/comptable/")
 
                 else:
@@ -78,22 +87,27 @@ def login_view(request):
                         #return HttpResponse("c'est la vue DE et enseignant")
                         #testons la sortie de la vue avec cette methode de enseignant 
                         #direct_etude_ens_view est une classe qui se retrouve au noveau de home 
+                        request.session['pseudo']=vargetnom["username"]
                         return redirect("/direct_etude_ens_view")
                     elif 2 in tout_privillege:
                         login(request, user)
                         #return HttpResponse("c'est la vue Secretaire et enseignant")
+                        request.session['pseudo']=vargetnom["username"]
                         return redirect("/secretaire_ens/")
                     elif 3 in tout_privillege:
                         login(request, user)
                         #return HttpResponse("c'est la vue DG et enseignant")
+                        request.session['pseudo']=vargetnom["username"]
                         return redirect("/direct_general_ens/")
                     elif 5 in tout_privillege:
                         login(request, user)
                         #return HttpResponse("c'est la vue daf et enseignant")
+                        request.session['pseudo']=vargetnom["username"]
                         return redirect("/daf_ens/")
                     elif 7 in tout_privillege:
                         login(request, user)
                         #return HttpResponse("c'est la vue Compta et enseignant")
+                        request.session['pseudo']=vargetnom["username"]
                         return redirect("/comptable_ens/")
             else:
                 msg = 'Invalid credentials'

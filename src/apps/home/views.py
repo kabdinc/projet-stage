@@ -10,6 +10,8 @@ from django.shortcuts import render
 from django.template import loader
 from django.urls import reverse
 
+from apps.authentication.views import login_view
+
 
 @login_required(login_url="/login/")
 def index(request):
@@ -54,10 +56,11 @@ def direct_etude_view(request):
 @login_required(login_url="/login/")
 def direct_etude_ens_view(request):
      html_template = loader.get_template('home/index.html')
-     return render(request,"home/index.html",context={})
+     return render(request,"home/de.html")
 
 @login_required(login_url="/login/")  
 def secretaire_view(request):
+
      html_template = loader.get_template('home/secretaire.html')
      return render(request,"home/secretaire.html",context={})
 
