@@ -49,7 +49,7 @@ def pages(request):
 @login_required(login_url="/login/")
 def direct_etude_view(request):
      html_templat = loader.get_template('accounts/register.html')
-     return render(request,html_templat,context={})
+     return render(request,"home/de.html")
 
 #sur la classe qui va sortir chaque page html on devra mettre un login required et ensuite specifier la page a creer dans le render
 #pur le context on pourra ajouter les variable qu'on voudra exporter apres 
@@ -87,7 +87,7 @@ def daf_view(request):
 @login_required(login_url="/login/")  
 def daf_ens_view(request):
      html_template = loader.get_template('home/index.html')
-     return render(request,"home/index.html",context={})
+     return render(request,"home/daf.html",context={})
 
 @login_required(login_url="/login/")  
 def administrateur_view(request):
@@ -97,7 +97,7 @@ def administrateur_view(request):
 @login_required(login_url="/login/")  
 def enseignant_view(request):
      html_template = loader.get_template('home/index.html')
-     return render(request,"home/index.html",context={})  
+     return render(request,"home/enseignant.html",context={})  
 
 @login_required(login_url="/login/")  
 def comptable_view(request):
@@ -108,3 +108,6 @@ def comptable_view(request):
 def comptable_ens_view(request):
       html_template = loader.get_template('home/index.html')
       return render(request,"home/index.html",context={}) 
+
+def double_role(request):
+     return render(request,"home/double_role.html",context={})

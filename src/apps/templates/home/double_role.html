@@ -1,0 +1,117 @@
+{% extends "layouts/base_projet.html" %}
+
+{% block title %} Dashboard {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <!-- [ Main Content ] start -->
+    <div class="pcoded-main-container">
+        <div class="pcoded-wrapper">
+
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <!-- [ breadcrumb ] start -->
+
+                    <!-- [ breadcrumb ] end -->
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <!-- [ Main Content ] start -->
+                            <div class="row">
+                        
+                                <!-- entete start -->
+                                <div class="col-xl-12 col-md-6">
+                                    <div class="card card-event">
+                                        <div class="card-block">
+                                            <div class="row align-items-center justify-content-center">
+                                                <div class="col">
+                                                    <h5 class="m-0"><h2>Bienvenue</h2> </h5>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <label class="label theme-bg2 text-white f-14 f-w-400 float-right"><h2>@nom de l'ecole</h2> </label>
+                                                </div>
+                                            </div>
+                                            <h3 class="mt-3 col  f-w-300">{{request.session.pseudo}}</h3>
+                                            
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="col-xl-12 col-md-6">
+                                    <div class="card card-event">
+                                        <div class="card-block">
+                                            <div class="row align-items-center justify-content-center">
+                                                <div class="col-auto">
+                                                    {% if request.session.iden == 1 %}
+                                                        {% url 'directeur_etude' as the_url %}
+                                                        <a href="{{ the_url }}"><button class=" label btn btn-outline-primary   text-white f-14 f-w-400 float-right"><h2>Aller à DE</h2> </button></a>
+                                                    
+                                                    {% elif request.session.iden == 2 %}
+                                                        {% url 'secretaire' as the_url %}
+                                                        <a href="{{ the_url }}"><button class=" label btn btn-outline-primary   text-white f-14 f-w-400 float-right"><h2>Aller à Secrétaire</h2> </button></a>
+                                                    
+                                                    {% elif request.session.iden == 3 %}
+                                                        {% url 'direct_general' as the_url %}
+                                                        <a href="{{ the_url }}"><button class=" label btn btn-outline-primary   text-white f-14 f-w-400 float-right"><h2>Aller à DG</h2> </button></a>
+                                                    
+                                                    {% elif request.session.iden == 5 %}
+                                                        {% url 'daf' as the_url %}
+                                                        <a href="{{ the_url }}"><button class=" label btn btn-outline-primary   text-white f-14 f-w-400 float-right"><h2>Aller à DAF</h2> </button></a>
+                                                    
+                                                    {% elif request.session.iden == 7 %}
+                                                        {% url 'comptable' as the_url %}
+                                                        <a href="{{ the_url }}"><button class=" label btn btn-outline-primary   text-white f-14 f-w-400 float-right"><h2>Aller à DAF</h2> </button></a>
+                                                    
+                                                    {% endif %}
+                                                    
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="col-xl-12 col-md-6">
+                                    <div class="card card-event">
+                                        <div class="card-block">
+                                            <div class="row align-items-center justify-content-center">
+                                                <div class="col-auto">
+                                                    
+                                                    {% url 'enseignant' as en %}
+                                                    
+                                                    <a href="{{ en }}"><button class=" label btn btn-outline-warning   text-white f-14 f-w-400 float-right"><h2>Aller à Enseignant</h2> </button></a>
+                                                    
+                                                </div>
+                                            </div>
+                                            
+                                            
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- entete fin  end -->
+                                
+                               
+                            
+
+                            </div>
+                            <!-- [ Main Content ] end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- [ Main Content ] end -->            
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
