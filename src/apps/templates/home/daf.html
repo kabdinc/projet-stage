@@ -1,138 +1,64 @@
 {% extends "layouts/base_projet.html" %}
 
-{% block title %} Dashboard {% endblock %} 
-
-<!-- Specific CSS goes HERE -->
-{% block stylesheets %}{% endblock stylesheets %}
+{% extends 'base.html' %}
 
 {% block content %}
+<h2>Welcome Finance Director!</h2>
 
-    <!-- [ Main Content ] start -->
-    <div class="pcoded-main-container">
-        <div class="pcoded-wrapper">
+<div class="row">
+  <div class="col-md-4">
+    <h3>List of Students</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Class</th>
+          <th>Tuition Fees Paid</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for student in students %}
+        <tr>
+          <td>{{ student.first_name }}</td>
+          <td>{{ student.last_name }}</td>
+          <td>{{ student.class_name }}</td>
+          <td>{{ student.tuition_fees_paid }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  
+  <div class="col-md-4">
+    <h3>Modify Tuition Fees</h3>
+    <form method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="sector">Sector</label>
+        <select name="sector_id" class="form-control" required>
+          {% for sector in sectors %}
+          <option value="{{ sector.id }}">{{ sector.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="class">Class</label>
+        <select name="class_id" class="form-control" required>
+          {% for c in classes %}
+          <option value="{{ c.id }}">{{ c.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="tuition_fees">Tuition Fees</label>
+        <input type="number" name="tuition_fees" class="form-control" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Update Tuition Fees</button>
+    </form>
+    {% if form.errors %}
+    <div class="alert alert-danger
 
-            <div class="pcoded-content">
-                <div class="pcoded-inner-content">
-                    <!-- [ breadcrumb ] start -->
-
-                    <!-- [ breadcrumb ] end -->
-                    <div class="main-body">
-                        <div class="page-wrapper">
-                            <!-- [ Main Content ] start -->
-                            <div class="row">
-                        
-                                <!-- entete start -->
-                                <div class="col-xl-12 col-md-6">
-                                    <div class="card card-event">
-                                        <div class="card-block">
-                                            <div class="row align-items-center justify-content-center">
-                                                <div class="col">
-                                                    <h5 class="m-0"><h2>Bienvenue</h2> </h5>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <label class="label theme-bg2 text-white f-14 f-w-400 float-right"><h2>@nom de l'ecole</h2> </label>
-                                                </div>
-                                            </div>
-                                            <h3 class="mt-3 col  f-w-300">{{ request.session.pseudo }}</h3>
-                                            
-                                        </div>
-                                    </div>
-                                    
-                                
-                                </div>
-                                <!-- entete fin  end -->
-                                
-                                <h5>Menu</h5>
-                                <hr>
-                                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                    <li class="nav-item">
-                                        <a class="nav-link text-uppercase" id="consul_prof_h-tab" data-toggle="tab" href="#consul_prof_h" role="tab" aria-controls="consul_prof_h" aria-selected="false">Consulter Prof/Heure</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link text-uppercase" id="def_prix_h-tab" data-toggle="tab" href="#def_prix_h" role="tab" aria-controls="def_prix_h" aria-selected="false">Définir prix/Heure</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link text-uppercase" id="voir_pai-tab" data-toggle="tab" href="#voir_pai" role="tab" aria-controls="voir_pai" aria-selected="false">Voir Paiement</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link text-uppercase" id="def_sco-tab" data-toggle="tab" href="#def_sco" role="tab" aria-controls="def_sco" aria-selected="false">Definir Scolarité</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link text-uppercase" id="etats-tab" data-toggle="tab" href="#etats" role="tab" aria-controls="etats" aria-selected="false">Etats</a>
-                                    </li>
-                                </ul>
-                                <div class="tab-content" id="myTabContent">
-                                    <div class="tab-pane fade" id="consul_prof_h" role="tabpanel" aria-labelledby="consul_prof_h-tab">
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h5>Hello card</h5>
-                                            </div>
-                                            <div class="card-block">
-                                                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="def_prix_h" role="tabpanel" aria-labelledby="def_prix_h-tab">
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h5>Hello card</h5>
-                                            </div>
-                                            <div class="card-block">
-                                                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="voir_pai" role="tabpanel" aria-labelledby="voir_pai-tab">
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h5>diferente subdivision </h5>
-                                            </div>
-                                            <div class="card-block">
-                                                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="def_sco" role="tabpanel" aria-labelledby="def_sco-tab">
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h5>diferente subdivision </h5>
-                                            </div>
-                                            <div class="card-block">
-                                                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="etats" role="tabpanel" aria-labelledby="etats-tab">
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h5>diferente subdivision </h5>
-                                            </div>
-                                            <div class="card-block">
-                                                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            
-                            
-
-                            </div>
-                            <!-- [ Main Content ] end -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-    <!-- [ Main Content ] end -->            
-
-{% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %}{% endblock javascripts %}

@@ -46,6 +46,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps.home'  ,
     'apps.authentication',
+    'apps.maquette',
+    'apps.inscription_frais',
+    'apps.initial',
 
 ]
 
@@ -57,6 +60,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'apps.middleware.CustomMIMEMiddleware',
 ]
 
 ROOT_URLCONF = 'projet.urls'
@@ -88,11 +92,12 @@ WSGI_APPLICATION = 'projet.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
-         'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME':'gestion',
-        'USER': 'abdin',
+        'USER': 'abdine',
         'PASSWORD':'admin123',
         'HOST':'localhost',
         'PORT': '5432'
@@ -136,7 +141,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(CORE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(CORE_DIR, 'static')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -144,7 +149,23 @@ STATIC_ROOT = os.path.join(CORE_DIR, 'staticfiles')
 
 STATICFILES_DIRS = (
     os.path.join(CORE_DIR, 'apps/static'),
+    
 )
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/4.2/howto/static-files/
+
+STATIC_URL = 'static/'
+
+# Default primary key field type
+# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+

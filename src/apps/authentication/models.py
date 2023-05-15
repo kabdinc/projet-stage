@@ -23,6 +23,7 @@ class Type_user(models.Model):
 
 # create de la classe intervenant qui hérite de la classe user
 class Intervenant(AbstractUser):
-    type_user = models.ManyToManyField(Type_user)
+   type_user = models.ManyToManyField(Type_user)
+    
 
-  
+   

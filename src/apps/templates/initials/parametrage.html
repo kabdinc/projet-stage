@@ -1,0 +1,81 @@
+
+{% extends 'layouts/base_projet.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<!-- Onglets de navigation -->
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link active" data-toggle="tab" href="#etablissement-form">Etablissement</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#annee-form">Année académique</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#niveau-form">Niveau scolaire</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#cycle-form">Cycle</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#filiere-form">Filière</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#classe-form">Classe</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#ue-form">Unité d'enseignement</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#matiere-form">Matière</a>
+  </li>
+</ul>
+
+<!-- Contenu des onglets -->
+<div class="tab-content">
+  
+  <!-- Onglet Etablissement -->
+  <div id="etablissement-form" class="tab-pane active">
+    {% include 'initials/etablissement.html' %}
+  </div>
+  
+  <!-- Onglet Année académique -->
+  <div id="annee-form" class="tab-pane">
+    {% include 'initials/annee_academique.html' %}
+  </div>
+  
+  <!-- Onglet Niveau scolaire -->
+  <div id="niveau-form" class="tab-pane">
+    {% include 'initials/niveau_scolaire.html' %}
+  </div>
+  
+  <!-- Onglet Cycle -->
+  <div id="cycle-form" class="tab-pane">
+    {% include 'initials/cycle.html' %}
+  </div>
+  
+  <!-- Onglet Filière -->
+  <div id="filiere-form" class="tab-pane">
+    {% include 'initials/filiere.html' %}
+  </div>
+  
+  <!-- Onglet Classe -->
+  <div id="classe-form" class="tab-pane">
+    {% include 'initials/classe.html' %}
+  </div>
+  
+  <!-- Onglet Unité d'enseignement -->
+  <div id="ue-form" class="tab-pane">
+    {% include 'initials/ue.html' %}
+  </div>
+  
+  <!-- Onglet Matière -->
+  <div id="matiere-form" class="tab-pane">
+    {% include 'initials/matiere.html' %}
+  </div>
+  
+</div>
+<script src="{% static 'assets/js/parametrage.js' %}"></script>
+{% endblock %}
