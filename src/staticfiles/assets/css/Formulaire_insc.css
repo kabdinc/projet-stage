@@ -1,0 +1,51 @@
+.auth-wrapper1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .auth-content1 {
+    max-width: 400px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  .auth-bg1 {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: #f7f7f7;
+  }
+  
+  .auth-bg1 .r {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: #e0e0e0;
+    border-radius: 50%;
+    opacity: 0.6;
+  }
+  
+  .auth-bg1 .r:nth-child(1) {
+    top: 10%;
+    left: 10%;
+  }
+  
+  .auth-bg1 .r:nth-child(2) {
+    top: 10%;
+    right: 10%;
+  }
+  
+  .auth-bg1 .r:nth-child(3) {
+    bottom: 10%;
+    right: 10%;
+  }
+  
+  .auth-bg1 .r:nth-child(4) {
+    bottom: 10%;
+
+  }
+    
+   
+  

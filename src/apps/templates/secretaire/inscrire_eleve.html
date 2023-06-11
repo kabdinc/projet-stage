@@ -1,0 +1,130 @@
+{% extends 'layouts/base_projet.html' %}
+{% block stylesheets %}
+<style>
+ 
+</style>
+{% endblock stylesheets %}
+
+{% block content %}
+{% load static %}
+
+<div class="pcoded-main-container">
+    <div class="pcoded-wrapper">
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <div class="main-body">
+                    <div class="page-wrapper">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>INSCRIPTION</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <h5>Entrez les informations</h5>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <form method="post" class="form_inscription">
+                                                    {% csrf_token %}
+                                                    <div class="form-group">
+                                                        <label for="AnneeAcademique">Année Academique</label>
+                                                        {{ form.AnneeAcademique }}
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="{{ form.nom.id_for_label }}">Nom</label>
+                                                        {{ form.nom }}
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="{{ form.prenoms.id_for_label }}">Prénom</label>
+                                                        {{ form.prenoms }}
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="date_naissance">Date de naissance</label>
+                                                        {{ form.date_naissance }}
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="cycle">Cycle</label>
+                                                        {{ form.cycle }}
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="filiere">Filière</label>
+                                                        {{ form.filiere }}
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="classe">Classe</label>
+                                                        {{ form.classe }}
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="id_frais_inscription">Frais d'inscription</label>
+                                                       
+                                                        {{ form.frais_inscription }}
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary">Inscrire</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+      // Lorsque la valeur de cycle est modifiée
+      $('#cycle').change(function() {
+        var cycleId = $(this).val();
+        // Faire une requête AJAX pour récupérer les filières
+        $.ajax({
+          url: '/get_filiere/',
+          data: {
+            'cycle_id': cycleId
+          },
+          success: function(data) {
+            $('#filiere').html(data);
+          }
+        });
+      });
+
+      // Lorsque la valeur de filière est modifiée
+      $('#filiere').change(function() {
+        var filiereId = $(this).val();
+        // Faire une requête AJAX pour récupérer les classes
+        $.ajax({
+          url: '/get_classe/',
+          data: {
+            'filiere_id': filiereId
+          },
+          success: function(data) {
+            $('#classe').html(data);
+          }
+        });
+      });
+
+      // Lorsque la valeur de classe est modifiée
+      $('#classe').change(function() {
+        var classeId = $(this).val();
+        // Faire une requête AJAX pour récupérer les frais de scolarité
+        $.ajax({
+            url: '/get_frais_inscription/',
+            data: {
+                'classe_id': classeId
+            },
+            success: function(data) {
+                $('#id_frais_inscription').val(data.montant);
+            }
+        });
+    });
+
+      
+    });
+</script>
+
+{% endblock content %}

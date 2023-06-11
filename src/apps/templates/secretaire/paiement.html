@@ -1,0 +1,85 @@
+{% extends 'layouts/base_projet.html' %}
+{% include 'includes/sidebar_de.html' %}
+
+
+{% block stylesheets %}
+<style>
+ 
+</style>
+
+{% endblock stylesheets %}
+
+{% block content %}
+{% load static %}
+
+
+
+<div class="pcoded-main-container">
+    <div class="pcoded-wrapper">
+
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <!-- [ breadcrumb ] start -->
+               
+                <!-- [ breadcrumb ] end -->
+                <div class="main-body">
+                    <div class="page-wrapper">
+                        <!-- [ Main Content ] start -->
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>PAIEMENT</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <h5>Entrez les informations</h5>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <form method="post" class="form_paiement">
+                                                    {% csrf_token %}
+                                                    <div class="form-group">
+                                                        <label for="Etudiant">Etudiant</label>
+                                                        {{ form.etudiant }}
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="Montant">Montant</label>
+                                                        {{ form.montant_paye}}
+                                                    </div>
+                                                    
+                                                    
+                                                    <div class="form-group">
+                                                        <label for="Classe">Classe</label>
+                                                        {{ form.classe }}
+                                                    </div>
+                                                   
+                                                    <button type="submit" class="btn btn-primary">Payer</button>
+                                                </form>
+                                            </div>
+                                          
+                                        </div>
+                                       
+                                    </div>
+                                </div>
+                            
+                                
+                                </div>
+                            </div>
+                        </div>
+                        <!-- [ Main Content ] end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+
+{% include 'includes/sidebar_secretaire.html' %}
+{% endblock %}
+
+
+
+
+

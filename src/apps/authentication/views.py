@@ -123,7 +123,7 @@ def login_view(request):
 
                     return redirect("/double_role")
             else:
-                msg = 'Invalid credentials'
+                msg = 'informations invalides'
 
         else:
             msg = 'Erreur lors de la validation du formulaire'

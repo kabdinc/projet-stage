@@ -6,6 +6,9 @@ from django.contrib.auth.models import User
 
 class Etablissement(models.Model):
     nom = models.CharField(max_length=100)
+    def __str__(self):
+        return self.nom
+    
     
 class AnneeAcademique(models.Model):
     libelle = models.CharField(max_length=100)
@@ -18,7 +21,14 @@ class AnneeAcademique(models.Model):
         
     
 class NiveauScolaire(models.Model):
-    nom = models.CharField(max_length=100)
+    choix =(
+        
+        ('PRIMAIRE', 'Primaire'),
+        ('SECONDAIRE', 'Secondaire'),
+        ('SUPERIEUR', 'Enseignement supérieur'),
+        
+    )
+    nom = models.CharField(max_length=100,choices=choix)
     etablissement= models.ForeignKey(Etablissement, on_delete=models.SET_NULL, null=True)
     
 class Cycle(models.Model):
@@ -52,6 +62,8 @@ class Classe(models.Model):
     code =models.CharField(max_length=15 ,null=True)
     filiere = models.ForeignKey(Filiere, on_delete=models.SET_NULL, null=True)
     AnneeAcademique = models.ForeignKey(AnneeAcademique,on_delete=models.SET_NULL,null=True)
+    frais_scolarite = models.DecimalField(max_digits=10, decimal_places=2, null=True)
+    frais_inscription = models.DecimalField(max_digits=10, decimal_places=2, null=True)
    
     def __str__(self):
         return self.nom

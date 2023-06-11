@@ -6,61 +6,206 @@ from apps.maquette.models import Etablissement, AnneeAcademique, NiveauScolaire,
 from .forms import EtablissementForm, AnneeAcademiqueForm, NiveauScolaireForm, CycleForm, FiliereForm, ClasseForm, UnitEnseignementForm, MatiereForm
 
 def parametrage(request):
-    etablissement_form = EtablissementForm()
-    annee_academique_form = AnneeAcademiqueForm()
-    niveau_scolaire_form = NiveauScolaireForm()
-    cycle_form = CycleForm()
-    filiere_form = FiliereForm()
-    classe_form = ClasseForm()
-    ue_form = UnitEnseignementForm()
-    matiere_form = MatiereForm()
-    context = {'etablissement_form': etablissement_form, 
-               'annee_academique_form': annee_academique_form,
-               'niveau_scolaire_form': niveau_scolaire_form,
-               'cycle_form': cycle_form,
-               'filiere_form': filiere_form,
-               'classe_form': classe_form,
-               'ue_form': ue_form,
-               'matiere_form': matiere_form}
+   
+    return render(request, 'initials/parametrage.html')
+
+def gestion_etablissement(request):
+   
+    return render(request, 'initials/gestion_etablissement.html')
+
+
+
+def gestion_cycle(request):
+    cycles = Cycle.objects.all()
+    context = {
+        'cycles': cycles
+    }
+    return render(request, 'initials/gestion_cycle.html', context)
+
+def create_niveau_scolaire(request):
     if request.method == 'POST':
-        if 'etablissement-form' in request.POST:
-            etablissement_form = EtablissementForm(request.POST)
-            if etablissement_form.is_valid():
-                etablissement_form.save()
-                return redirect('parametrage')
-        elif 'annee-academique-form' in request.POST:
-            annee_academique_form = AnneeAcademiqueForm(request.POST)
-            if annee_academique_form.is_valid():
-                annee_academique_form.save()
-                return redirect('parametrage')
-        elif 'niveau-scolaire-form' in request.POST:
-            niveau_scolaire_form = NiveauScolaireForm(request.POST)
-            if niveau_scolaire_form.is_valid():
-                niveau_scolaire_form.save()
-                return redirect('parametrage')
-        elif 'cycle-form' in request.POST:
-            cycle_form = CycleForm(request.POST)
-            if cycle_form.is_valid():
-                cycle_form.save()
-                return redirect('parametrage')
-        elif 'filiere-form' in request.POST:
-            filiere_form = FiliereForm(request.POST)
-            if filiere_form.is_valid():
-                filiere_form.save()
-                return redirect('parametrage')
-        elif 'classe-form' in request.POST:
-            classe_form = ClasseForm(request.POST)
-            if classe_form.is_valid():
-                classe_form.save()
-                return redirect('parametrage')
-        elif 'ue-form' in request.POST:
-            ue_form = UnitEnseignementForm(request.POST)
-            if ue_form.is_valid():
-                ue_form.save()
-                return redirect('parametrage')
-        elif 'matiere-form' in request.POST:
-            matiere_form = MatiereForm(request.POST)
-            if matiere_form.is_valid():
-                matiere_form.save()
-                return redirect('parametrage')
-    return render(request, 'initials/parametrage.html', context)
+        form = NiveauScolaireForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('parametrage')  # Rediriger vers la liste des niveaux scolaires
+    else:
+        form = NiveauScolaireForm()
+    return render(request, 'initials/creer_niveau_scolaire.html', {'form': form})
+
+def update_niveau_scolaire(request, niveau_scolaire_id):
+    niveau_scolaire = NiveauScolaire.objects.get(id=niveau_scolaire_id)
+    if request.method == 'POST':
+        form = NiveauScolaireForm(request.POST, instance=niveau_scolaire)
+        if form.is_valid():
+            form.save()
+            return redirect('parametrage')  # Rediriger vers la liste des niveaux scolaires
+    else:
+        form = NiveauScolaireForm(instance=niveau_scolaire)
+    return render(request, 'initials/modifier_niveau_scolaire.html', {'form': form})
+
+def delete_niveau_scolaire(request, niveau_scolaire_id):
+    niveau_scolaire = NiveauScolaire.objects.get(id=niveau_scolaire_id)
+    niveau_scolaire.delete()
+    return redirect('parametrage')  # Rediriger vers la liste des niveaux scolaires
+
+def create_etablissement(request):
+    if request.method == 'POST':
+        form = EtablissementForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('parametrage')  # Rediriger vers la liste des établissements
+    else:
+        form = EtablissementForm()
+    return render(request, 'initials/creer_etablissement.html', {'form': form})
+
+def update_etablissement(request, etablissement_id):
+    etablissement = Etablissement.objects.get(id=etablissement_id)
+    if request.method == 'POST':
+        form = EtablissementForm(request.POST, instance=etablissement)
+        if form.is_valid():
+            form.save()
+            return redirect('parametrage')  # Rediriger vers la liste des établissements
+    else:
+        form = EtablissementForm(instance=etablissement)
+    return render(request, 'initials/modifier_etablissement.html', {'form': form})
+
+def delete_etablissement(request, etablissement_id):
+    etablissement = Etablissement.objects.get(id=etablissement_id)
+    etablissement.delete()
+    return redirect('parametrage')  # Rediriger vers la liste des établissements
+
+
+
+def create_cycle(request):
+    if request.method == 'POST':
+        form = CycleForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('parametrage')  # Rediriger vers la liste des cycles
+    else:
+        form = CycleForm()
+    return render(request, 'initials/creer_cycle.html', {'form': form})
+
+def update_cycle(request, cycle_id):
+    cycle = Cycle.objects.get(id=cycle_id)
+    if request.method == 'POST':
+        form = CycleForm(request.POST, instance=cycle)
+        if form.is_valid():
+            form.save()
+            return redirect('parametrage')  # Rediriger vers la liste des cycles
+    else:
+        form = CycleForm(instance=cycle)
+    return render(request, 'initials/modifier_cycle.html', {'form': form})
+
+def delete_cycle(request, cycle_id):
+    cycle = Cycle.objects.get(id=cycle_id)
+    cycle.delete()
+    return redirect('parametrage')  # Rediriger vers la liste des cycles
+
+
+
+def create_filiere(request):
+    if request.method == 'POST':
+        form = FiliereForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('parametrage')
+    else:
+        form = FiliereForm()
+    return render(request, 'initials/creer_filiere.html', {'form': form})
+
+def update_filiere(request, filiere_id):
+    filiere = Filiere.objects.get(id=filiere_id)
+    if request.method == 'POST':
+        form = FiliereForm(request.POST, instance=filiere)
+        if form.is_valid():
+            form.save()
+            return redirect('parametrage')
+    else:
+        form = FiliereForm(instance=filiere)
+    return render(request, 'initials/modifier_filiere.html', {'form': form})
+
+def delete_filiere(request, filiere_id):
+    filiere = Filiere.objects.get(id=filiere_id)
+    filiere.delete()
+    return redirect('parametrage')
+
+def create_classe(request):
+    if request.method == 'POST':
+        form = ClasseForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('parametrage')
+    else:
+        form = ClasseForm()
+    return render(request, 'initials/creer_classe.html', {'form': form})
+
+def update_classe(request, classe_id):
+    classe = Classe.objects.get(id=classe_id)
+    if request.method == 'POST':
+        form = ClasseForm(request.POST, instance=classe)
+        if form.is_valid():
+            form.save()
+            return redirect('parametrage')
+    else:
+        form = ClasseForm(instance=classe)
+    return render(request, 'initials/modifier_classe.html', {'form': form})
+
+def delete_classe(request, classe_id):
+    classe = Classe.objects.get(id=classe_id)
+    classe.delete()
+    return redirect('parametrage')
+
+def create_unit_enseignement(request):
+    if request.method == 'POST':
+        form = UnitEnseignementForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('parametrage')
+    else:
+        form = UnitEnseignementForm()
+    return render(request, 'initials/creer_ue.html', {'form': form})
+
+def update_unit_enseignement(request, unit_enseignement_id):
+    unit_enseignement = UnitEnseignement.objects.get(id=unit_enseignement_id)
+    if request.method == 'POST':
+        form = UnitEnseignementForm(request.POST, instance=unit_enseignement)
+        if form.is_valid():
+            form.save()
+            return redirect('parametrage')
+    else:
+        form = UnitEnseignementForm(instance=unit_enseignement)
+    return render(request, 'initials/modifier_ue.html', {'form': form})
+
+def delete_unit_enseignement(request, unit_enseignement_id):
+    unit_enseignement = UnitEnseignement.objects.get(id=unit_enseignement_id)
+    unit_enseignement.delete()
+    return redirect('parametrage')
+
+def create_matiere(request):
+    if request.method == 'POST':
+        form = MatiereForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('parametrage')
+    else:
+        form = MatiereForm()
+    return render(request, 'initials/creer_matiere.html', {'form': form})
+
+def update_matiere(request, matiere_id):
+    matiere = Matiere.objects.get(id=matiere_id)
+    if request.method == 'POST':
+        form = MatiereForm(request.POST, instance=matiere)
+        if form.is_valid():
+            form.save()
+            return redirect('parametrage')
+    else:
+        form = MatiereForm(instance=matiere)
+    return render(request, 'initials/modifier_matiere.html', {'form': form})
+
+def delete_matiere(request, matiere_id):
+    matiere = Matiere.objects.get(id=matiere_id)
+    matiere.delete()
+    return redirect('parametrage')
+
+

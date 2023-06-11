@@ -1,38 +1,23 @@
-$(document).ready(function() {
-    $('#id_cycle').change(function() {
-      var cycleId = $(this).val();
-      if (cycleId) {
-        $.ajax({
-          url: '/get_filieres/',
-          data: {
-            'cycle_id': cycleId
-          },
-          success: function(data) {
-            $('#id_filiere').html(data);
-            $('#id_classe').html('<option value="">-------</option>');
+document.addEventListener('DOMContentLoaded', function() {
+  function updateFraisInscription() {
+      var classeId = document.getElementById('classe').value;
+      var fraisInscriptionElement = document.getElementById('id_frais_inscription');
+
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', '/get_frais_inscription/?classe_id=' + classeId, true);
+      xhr.onload = function() {
+          if (xhr.status === 200) {
+              fraisInscriptionElement.innerHTML = xhr.responseText;
+          } else {
+              fraisInscriptionElement.innerHTML = '';
           }
-        });
-      } else {
-        $('#id_filiere').html('<option value="">-------</option>');
-        $('#id_classe').html('<option value="">-------</option>');
-      }
-    });
-  
-    $('#id_filiere').change(function() {
-      var filiereId = $(this).val();
-      if (filiereId) {
-        $.ajax({
-          url: '/get_classes/',
-          data: {
-            'filiere_id': filiereId
-          },
-          success: function(data) {
-            $('#id_classe').html(data);
-          }
-        });
-      } else {
-        $('#id_classe').html('<option value="">-------</option>');
-      }
-    });
-  });
-  
+      };
+      xhr.onerror = function() {
+          fraisInscriptionElement.innerHTML = '';
+      };
+      xhr.send();
+  }
+
+  // Appeler la fonction updateFraisInscription() lorsque la valeur de la classe change
+  document.getElementById('classe').addEventListener('change', updateFraisInscription);
+});

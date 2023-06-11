@@ -1,81 +1,221 @@
-
 {% extends 'layouts/base_projet.html' %}
+{% include 'includes/de.html' %}
+
+
+{% block stylesheets %}
+<style>
+ 
+</style>
+
+{% endblock stylesheets %}
+
+{% block content %}
 {% load static %}
 
 
-{% block content %}
 
-<!-- Onglets de navigation -->
-<ul class="nav nav-tabs">
-  <li class="nav-item">
-    <a class="nav-link active" data-toggle="tab" href="#etablissement-form">Etablissement</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" data-toggle="tab" href="#annee-form">Année académique</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" data-toggle="tab" href="#niveau-form">Niveau scolaire</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" data-toggle="tab" href="#cycle-form">Cycle</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" data-toggle="tab" href="#filiere-form">Filière</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" data-toggle="tab" href="#classe-form">Classe</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" data-toggle="tab" href="#ue-form">Unité d'enseignement</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" data-toggle="tab" href="#matiere-form">Matière</a>
-  </li>
-</ul>
 
-<!-- Contenu des onglets -->
-<div class="tab-content">
-  
-  <!-- Onglet Etablissement -->
-  <div id="etablissement-form" class="tab-pane active">
-    {% include 'initials/etablissement.html' %}
-  </div>
-  
-  <!-- Onglet Année académique -->
-  <div id="annee-form" class="tab-pane">
-    {% include 'initials/annee_academique.html' %}
-  </div>
-  
-  <!-- Onglet Niveau scolaire -->
-  <div id="niveau-form" class="tab-pane">
-    {% include 'initials/niveau_scolaire.html' %}
-  </div>
-  
-  <!-- Onglet Cycle -->
-  <div id="cycle-form" class="tab-pane">
-    {% include 'initials/cycle.html' %}
-  </div>
-  
-  <!-- Onglet Filière -->
-  <div id="filiere-form" class="tab-pane">
-    {% include 'initials/filiere.html' %}
-  </div>
-  
-  <!-- Onglet Classe -->
-  <div id="classe-form" class="tab-pane">
-    {% include 'initials/classe.html' %}
-  </div>
-  
-  <!-- Onglet Unité d'enseignement -->
-  <div id="ue-form" class="tab-pane">
-    {% include 'initials/ue.html' %}
-  </div>
-  
-  <!-- Onglet Matière -->
-  <div id="matiere-form" class="tab-pane">
-    {% include 'initials/matiere.html' %}
-  </div>
-  
-</div>
-<script src="{% static 'assets/js/parametrage.js' %}"></script>
+    <!-- [ Main Content ] start -->
+    <div class="pcoded-main-container">
+      
+      <nav class="navbar navbar-dark bg-dark">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+          
+        
+      </div>
+     </nav>
+      
+        <div class="pcoded-wrapper">
+
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <!-- [ breadcrumb ] start -->
+
+                    <!-- [ breadcrumb ] end -->
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <!-- [ Main Content ] start -->
+                            <div class="row">
+                                <!--[ daily sales section ] start-->
+                                <div class="col-md-6 col-xl-4">
+                                    <div class="card daily-sales">
+                                        <div class="card-block">
+                                          <h6 class="mb-4">
+                                            <a href="{% url 'gestion_etablissement' %}" class="nav-link">
+                                              <span class="b-title custom-text">Etablissement</span>
+                                            </a>
+                                          </h6>
+                                            
+                                            <div class="row d-flex align-items-center">
+                                                <div class="col-9">
+                                                   
+                                                </div>
+
+                                                <div class="col-3 text-right">
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="progress m-t-30" style="height: 7px;">
+                                                <div class="h-bar progress-c-theme" role="progressbar"
+                                                        style="width: 50%;" aria-valuenow="50" aria-valuemin="0"
+                                                        aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-xl-4">
+                                  <div class="card daily-sales">
+                                      <div class="card-block">
+                                        <h6 class="mb-4">
+                                          <a href="{% url 'gestion_cycle' %}" class="nav-link">
+                                            <span class="b-title custom-text">Gestion Cycles</span>
+                                          </a>
+                                        </h6>
+                                          <div class="row d-flex align-items-center">
+                                              <div class="col-9">
+                                                 
+                                              </div>
+
+                                              <div class="col-3 text-right">
+                                                  
+                                              </div>
+                                          </div>
+                                          <div class="progress m-t-30" style="height: 7px;">
+                                              <div class="h-bar progress-c-theme" role="progressbar"
+                                                      style="width: 50%;" aria-valuenow="50" aria-valuemin="0"
+                                                      aria-valuemax="100"></div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+
+                              <div class="col-md-6 col-xl-4">
+                                <div class="card daily-sales">
+                                    <div class="card-block">
+                                      <h6 class="mb-4">
+                                        <a href="{% url 'directeur_etude' %}" class="nav-link">
+                                          <span class="b-title custom-text">Gestion Filières</span>
+                                        </a>
+                                      </h6>
+                                        <div class="row d-flex align-items-center">
+                                            <div class="col-9">
+                                               
+                                            </div>
+
+                                            <div class="col-3 text-right">
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="progress m-t-30" style="height: 7px;">
+                                            <div class="h-bar progress-c-theme" role="progressbar"
+                                                    style="width: 50%;" aria-valuenow="50" aria-valuemin="0"
+                                                    aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                          
+
+                          <div class="col-md-6 col-xl-4">
+                            <div class="card daily-sales">
+                                <div class="card-block">
+                                  <h6 class="mb-4">
+                                    <a href="{% url 'directeur_etude' %}" class="nav-link">
+                                      <span class="b-title custom-text">Gestion Classes</span>
+                                    </a>
+                                  </h6>
+                                    <div class="row d-flex align-items-center">
+                                        <div class="col-9">
+                                           
+                                        </div>
+
+                                        <div class="col-3 text-right">
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="progress m-t-30" style="height: 7px;">
+                                        <div class="h-bar progress-c-theme" role="progressbar"
+                                                style="width: 50%;" aria-valuenow="50" aria-valuemin="0"
+                                                aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xl-4">
+                          <div class="card daily-sales">
+                              <div class="card-block">
+                                <h6 class="mb-4">
+                                  <a href="{% url 'directeur_etude' %}" class="nav-link">
+                                    <span class="b-title custom-text">Gestion Unités Enseignement</span>
+                                  </a>
+                                </h6>
+                                  <div class="row d-flex align-items-center">
+                                      <div class="col-9">
+                                         
+                                      </div>
+
+                                      <div class="col-3 text-right">
+                                          
+                                      </div>
+                                  </div>
+                                  <div class="progress m-t-30" style="height: 7px;">
+                                      <div class="h-bar progress-c-theme" role="progressbar"
+                                              style="width: 50%;" aria-valuenow="50" aria-valuemin="0"
+                                              aria-valuemax="100"></div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-md-6 col-xl-4">
+                        <div class="card daily-sales">
+                            <div class="card-block">
+                              <h6 class="mb-4">
+                                <a href="{% url 'directeur_etude' %}" class="nav-link">
+                                  <span class="b-title custom-text">Gestion Matières</span>
+                                </a>
+                              </h6>
+                                <div class="row d-flex align-items-center">
+                                    <div class="col-9">
+                                       
+                                    </div>
+
+                                    <div class="col-3 text-right">
+                                        
+                                    </div>
+                                </div>
+                                <div class="progress m-t-30" style="height: 7px;">
+                                    <div class="h-bar progress-c-theme" role="progressbar"
+                                            style="width: 50%;" aria-valuenow="50" aria-valuemin="0"
+                                            aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                               
+                         
+
+                            </div>
+                            <!-- [ Main Content ] end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- [ Main Content ] end -->            
+
+
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
+
+{% include 'includes/sidebar_de.html' %}
 {% endblock %}
+
+
+
+
+
