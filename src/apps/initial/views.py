@@ -9,11 +9,17 @@ def parametrage(request):
    
     return render(request, 'initials/parametrage.html')
 
+
 def gestion_etablissement(request):
    
     return render(request, 'initials/gestion_etablissement.html')
 
-
+def liste_etablissements(request):
+    etablissements = Etablissement.objects.all()
+    context = {
+        'etablissements': etablissements
+    }
+    return render(request, 'initials/liste_etablissements.html', context)
 
 def gestion_cycle(request):
     cycles = Cycle.objects.all()
@@ -21,6 +27,37 @@ def gestion_cycle(request):
         'cycles': cycles
     }
     return render(request, 'initials/gestion_cycle.html', context)
+
+
+def gestion_filiere(request):
+    filieres = Filiere.objects.all()
+    context = {
+        'filieres': filieres
+    }
+    return render(request, 'initials/gestion_filiere.html', context)
+
+def gestion_classe(request):
+    classes = Classe.objects.all()
+    context = {
+        'classes': classes
+    }
+    return render(request, 'initials/gestion_classe.html', context)
+
+def gestion_ue(request):
+    unitenseignements = UnitEnseignement.objects.all()
+    context = {
+        'unitenseignements': unitenseignements
+    }
+    return render(request, 'initials/gestion_ue.html', context)
+
+
+def gestion_matiere(request):
+    matieres = Matiere.objects.all()
+    context = {
+        'matieres': matieres
+    }
+    return render(request, 'initials/gestion_matiere.html', context)
+
 
 def create_niveau_scolaire(request):
     if request.method == 'POST':
@@ -166,15 +203,15 @@ def create_unit_enseignement(request):
         form = UnitEnseignementForm()
     return render(request, 'initials/creer_ue.html', {'form': form})
 
-def update_unit_enseignement(request, unit_enseignement_id):
-    unit_enseignement = UnitEnseignement.objects.get(id=unit_enseignement_id)
+def update_unit_enseignement(request, unitenseignement_id):
+    unitenseignement = UnitEnseignement.objects.get(id=unitenseignement_id)
     if request.method == 'POST':
-        form = UnitEnseignementForm(request.POST, instance=unit_enseignement)
+        form = UnitEnseignementForm(request.POST, instance=unitenseignement)
         if form.is_valid():
             form.save()
             return redirect('parametrage')
     else:
-        form = UnitEnseignementForm(instance=unit_enseignement)
+        form = UnitEnseignementForm(instance=unitenseignement)
     return render(request, 'initials/modifier_ue.html', {'form': form})
 
 def delete_unit_enseignement(request, unit_enseignement_id):

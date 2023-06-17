@@ -16,8 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from apps.home.views import direct_etude_ens_view,direct_etude_view,comptable_ens_view,comptable_view,enseignant_view,administrateur_view,daf_ens_view,daf_view,direct_general_ens_view,direct_general_view,secretaire_ens_view,secretaire_view,double_role
-from apps.inscription_frais.views import inscrire_eleve,inscrire_eleve,get_classe,get_filiere,paiement,details_paiement,get_classe_details,get_frais_inscription
-from apps.initial.views import parametrage,create_classe,create_cycle,create_etablissement,create_filiere,create_matiere,create_niveau_scolaire,create_unit_enseignement,update_classe,update_cycle,update_etablissement,update_filiere,update_matiere,update_niveau_scolaire,update_unit_enseignement,delete_classe,delete_cycle,delete_etablissement,delete_filiere,delete_matiere,delete_niveau_scolaire,delete_unit_enseignement,gestion_etablissement,gestion_cycle
+from apps.inscription_frais.views import inscrire_eleve,inscrire_eleve,get_classe,get_filiere,paiement,details_paiement,get_classe_details,get_frais_inscription,recu_inscription
+from apps.initial.views import parametrage,create_classe,create_cycle,create_etablissement,create_filiere,create_matiere,create_niveau_scolaire,create_unit_enseignement,update_classe,update_cycle,update_etablissement,update_filiere,update_matiere,update_niveau_scolaire,update_unit_enseignement,delete_classe,delete_cycle,delete_etablissement,delete_filiere,delete_matiere,delete_niveau_scolaire,delete_unit_enseignement,gestion_etablissement,gestion_cycle,gestion_filiere,gestion_classe,liste_etablissements,gestion_ue,gestion_matiere
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -45,9 +45,11 @@ urlpatterns = [
     path('get_classe/', get_classe, name='get_classe'),
     path('paiement/', paiement, name='paiement'),
     path('get_frais_inscription/', get_frais_inscription, name='get_frais_inscription'),
-    path('details_paiement/', details_paiement, name='details_paiement'),
+    path('details_paiement/<int:etudiant_id>/<int:classe_id>/', details_paiement, name='details_paiement'),
     path("apps.inscription_frais/",include("apps.inscription_frais.urls")),
     path('get_classe_details/', get_classe_details, name='details_classe'),
+    path('recu_inscription/<int:etudiant_id>/', recu_inscription, name='recu_inscription'),
+
   
     path("parametrage/", parametrage, name="parametrage"), 
     path("creer_niveau/", create_niveau_scolaire, name="creer_niveau"), 
@@ -60,22 +62,27 @@ urlpatterns = [
     path("creer_matiere/", create_matiere, name="creer_matiere"),
     path("modifier_niveau/", update_niveau_scolaire, name="modifier_niveau"), 
     path("modifier_classe/", update_classe, name="modifier_classe"), 
-    path("modifier_filiere/", update_filiere, name="modifier_filiere"), 
-    path("'modifier_cycle/<int:cycle_id>/'/", update_cycle, name="modifier_cycle"),
-    path("modifier_classe/", update_classe, name="modifier_classe"),
-    path("modifier_etablissement/", update_etablissement, name="modifier_etablissement"), 
-    path("modifier_ue/", update_unit_enseignement, name="modifier_ue"),   
-    path("modifier_matiere/", update_matiere, name="modifier_matiere"),
+    path("modifier_filiere/<int:filiere_id>/", update_filiere, name="modifier_filiere"), 
+    path("modifier_cycle/<int:cycle_id>/", update_cycle, name="modifier_cycle"),
+    path("modifier_classe/<int:classe_id>/", update_classe, name="modifier_classe"),
+    path("modifier_etablissement/<int:etablissement_id>/", update_etablissement, name="modifier_etablissement"), 
+    path("modifier_ue/<int:unitenseignement_id>/", update_unit_enseignement, name="modifier_ue"),   
+    path("modifier_matiere/<int:matiere_id>/", update_matiere, name="modifier_matiere"),
     path("supprimer_niveau/", delete_niveau_scolaire, name="supprimer_niveau"), 
-    path("supprimer_classe/", delete_classe, name="supprimer_classe"), 
-    path("supprimer_filiere/", delete_filiere, name="delete_filiere"), 
+    path("supprimer_classe/<int:classe_id>/", delete_classe, name="supprimer_classe"), 
+    path("supprimer_filiere/<int:filiere_id>/", delete_filiere, name="delete_filiere"), 
     path("supprimer_cycle/<int:cycle_id>/", delete_cycle, name="supprimer_cycle"),
-    path("supprimer_classe/", delete_classe, name="supprimer_classe"),
-    path("supprimer_etablissement/", delete_etablissement, name="supprimer_etablissement"), 
-    path("supprimer_ue/", delete_unit_enseignement, name="supprimer_ue"),   
-    path("supprimer_matiere/", delete_matiere, name="supprimer_matiere"),
+    path("supprimer_etablissement/<int:etablissement_id>/", delete_etablissement, name="supprimer_etablissement"), 
+    path("supprimer_ue/<int:unitenseignement_id>/", delete_unit_enseignement, name="supprimer_ue"),   
+    path("supprimer_matiere/<int:matiere_id>/", delete_matiere, name="supprimer_matiere"),
     path("gestion_etablissement/", gestion_etablissement, name="gestion_etablissement"),
-     path("gestion_cycle/", gestion_cycle, name="gestion_cycle"),
+    path("gestion_cycle/", gestion_cycle, name="gestion_cycle"),
+    path("gestion_filiere/", gestion_filiere, name="gestion_filiere"),
+    path("gestion_classe/", gestion_classe, name="gestion_classe"),
+    path("liste_etablissements/", liste_etablissements, name="liste_etablissements"),
+    path("gestion_ue/", gestion_ue, name="gestion_ue"),
+    path("gestion_matiere/", gestion_matiere, name="gestion_matiere"),
+
 
 
     # Leave `Home.Urls` as last the last line

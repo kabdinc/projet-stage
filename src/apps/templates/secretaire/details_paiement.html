@@ -1,0 +1,29 @@
+{% extends 'layouts/base_projet.html' %}
+{% include 'includes/sidebar_de.html' %}
+
+
+{% block stylesheets %}
+<style>
+ 
+</style>
+
+{% endblock stylesheets %}
+
+{% block content %}
+{% load static %}
+
+
+<h2>Details du paiement</h2>
+<p>Etudiant: {{ etudiant }}</p>
+<p>Classe: {{ classe }}</p>
+<p>Frais de scolarité: {{ total_scolarite }}</p>
+<p>Montant payé: {{ total_paye }}</p>
+<p>Reste à payer: {{ reste_payer }}</p>
+
+
+{% endblock %}
+
+
+
+
+

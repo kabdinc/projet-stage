@@ -90,6 +90,7 @@ class Matiere(models.Model):
     coefficient = models.SmallIntegerField(null=True)
     
     
+    
 class Etudiant(models.Model):
     prenoms = models.CharField(max_length=50)
     nom = models.CharField(max_length=50)

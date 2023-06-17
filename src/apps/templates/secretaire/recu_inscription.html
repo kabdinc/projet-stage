@@ -1,0 +1,82 @@
+{% extends 'layouts/base_projet.html' %}
+{% block stylesheets %}
+
+<style>
+    .receipt {
+        text-align: center;
+        margin: auto;
+        width: 50%;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-family: Arial, sans-serif;
+    }
+
+    .logo {
+        max-width: 150px;
+        margin-bottom: 20px;
+    }
+
+    .form-label {
+        font-weight: bold;
+    }
+
+    .form-value {
+        margin-bottom: 10px;
+    }
+
+    .print-button {
+        margin-top: 20px;
+    }
+
+    @media print {
+        .print-button {
+            display: none;
+        }
+    }
+</style>
+
+
+{% endblock stylesheets %}
+
+{% block content %}
+{% load static %}
+
+<div class="receipt">
+    <img class="logo" src="/path/to/your/logo.png" alt="Logo de l'école">
+
+    <h3>Reçu d'inscription</h3>
+
+    <div class="form-label">Classe:</div>
+    <div class="form-value">{{ form.classe.value }}</div>
+
+    <div class="form-label">Cycle:</div>
+    <div class="form-value">{{ form.cycle.value }}</div>
+
+    <div class="form-label">Filière:</div>
+    <div class="form-value">{{ form.filiere.value }}</div>
+
+    <div class="form-label">Étudiant:</div>
+    <div class="form-value">{{ form.eleve.value }}</div>
+
+    <div class="form-label">Frais d'inscription:</div>
+    <div class="form-value">{{ form.frais_inscription.value }}</div>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="print-button" type="submit">Enregistrer</button>
+    </form>
+</div>
+
+<script>
+    function printReceipt() {
+        window.print();
+    }
+</script>
+
+<button class="print-button" onclick="printReceipt()">Imprimer</button>
+
+
+{% include 'includes/sidebar_secretaire.html' %}
+{% endblock content %}

@@ -25,7 +25,8 @@
                                         <hr>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <form method="post" class="form_inscription">
+                                                <form method="post" class="form_inscription" >
+                                                    
                                                     {% csrf_token %}
                                                     <div class="form-group">
                                                         <label for="AnneeAcademique">Année Academique</label>
@@ -126,5 +127,5 @@
       
     });
 </script>
-
+{% include 'includes/sidebar_secretaire.html' %}
 {% endblock content %}

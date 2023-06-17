@@ -1,6 +1,6 @@
 {% extends "layouts/base.html" %}
 
-{% block title %}Gestion des cycles{% endblock %}
+{% block title %}Gestion des etablissements{% endblock %}
 
 <!-- Specific CSS goes HERE -->
 {% block stylesheets %}{% endblock stylesheets %}
@@ -18,12 +18,12 @@
                             <div class="row align-items-center">
                                 <div class="col-md-12">
                                     <div class="page-header-title">
-                                        <h5 class="m-b-10">Gestion des cycles</h5>
+                                        <h5 class="m-b-10">Gestion des etablissements</h5>
                                     </div>
                                     <ul class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i></a></li>
                                         <li class="breadcrumb-item"><a href="#!">Tables</a></li>
-                                        <li class="breadcrumb-item"><a href="javascript:">Gestion des cycles</a></li>
+                                        <li class="breadcrumb-item"><a href="javascript:">Gestion des etablissements</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -37,14 +37,11 @@
                                 <!-- [ stiped-table ] start -->
                                 <div class="col-xl-12">
                                     <div class="card">
-                                        <div class="card-header">
-                                            <h5>Liste des cycles</h5>
-                                            <span class="d-block m-t-5">Utilisez la classe <code>table-striped</code> à l'intérieur de l'élément de tableau</span>
-                                        </div>
+                                       
                                         <div class="card-block table-border-style">
                                             <div class="table-responsive">
                                                 <div class="mb-3">
-                                                    <a href="{% url 'creer_cycle' %}" class="btn btn-primary">Ajouter</a>
+                                                    <a href="{% url 'creer_etablissement' %}" class="btn btn-primary">Ajouter</a>
                                                 </div>
                                                 <table class="table table-striped">
                                                     <thead>
@@ -55,13 +52,13 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        {% for cycle in cycles %}
+                                                        {% for etablissement in etablissements %}
                                                         <tr>
                                                             <th scope="row">{{ forloop.counter }}</th>
-                                                            <td>{{ cycle.nom }}</td>
+                                                            <td>{{ etablissement.nom }}</td>
                                                             <td>
-                                                                <button type="button" class="btn btn-outline-success" title="Modifier" data-toggle="tooltip" onclick="window.location.href='{% url 'modifier_cycle' cycle.id %}'">Modifier</button>
-                                                                <button type="button" class="btn btn-outline-danger" title="Supprimer" data-toggle="tooltip" onclick="window.location.href='{% url 'supprimer_cycle' cycle.id %}'">Supprimer</button>
+                                                                <button type="button" class="btn btn-outline-success" title="Modifier" data-toggle="tooltip" onclick="window.location.href='{% url 'modifier_etablissement' etablissement.id %}'">Modifier</button>
+                                                                <button type="button" class="btn btn-outline-danger" title="Supprimer" data-toggle="tooltip" onclick="window.location.href='{% url 'supprimer_etablissement' etablissement.id %}'">Supprimer</button>
                                                             </td>
                                                         </tr>
                                                         {% endfor %}

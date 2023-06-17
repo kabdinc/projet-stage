@@ -1,6 +1,6 @@
 from django import forms
 from apps.maquette.models import Cycle, Filiere, Classe,Etudiant,AnneeAcademique
-from apps.inscription_frais.models import  Paiement 
+from apps.inscription_frais.models import  Paiement ,RecuInscription
 
 
 
@@ -11,7 +11,7 @@ class EleveForm(forms.ModelForm):
     filiere = forms.ModelChoiceField(queryset=Filiere.objects.all(), widget=forms.Select(attrs={'id': 'filiere', 'data-url': '/get_filiere/', 'class': 'form-control'}))
     classe = forms.ModelChoiceField(queryset=Classe.objects.all(), widget=forms.Select(attrs={'id': 'classe', 'data-url': '/get_classe/', 'class': 'form-control'}))
     AnneeAcademique = forms.ModelChoiceField(queryset=AnneeAcademique.objects.all(), widget=forms.Select(attrs={'id': 'AneeAcademique', 'class': 'form-control'}))
-    frais_inscription = forms.DecimalField(disabled=True, widget=forms.TextInput(attrs={'id': 'id_frais_inscription', 'class': 'form-control'}))
+    frais_inscription = forms.DecimalField(widget=forms.TextInput(attrs={'id': 'id_frais_inscription', 'class': 'form-control'}))
     nom = forms.CharField(widget=forms.TextInput(attrs={
        'class': 'form-control',
        'id': 'nom',
@@ -36,7 +36,7 @@ class EleveForm(forms.ModelForm):
     
     class Meta:
         model = Etudiant
-        fields = ['prenoms', 'nom', 'date_naissance', 'classe', 'AnneeAcademique', 'cycle', 'filiere', 'frais_inscription']
+        fields = ['prenoms', 'nom', 'date_naissance', 'classe', 'AnneeAcademique']
 
 
 
@@ -66,3 +66,13 @@ class PaiementForm(forms.ModelForm):
         model = Paiement
         fields = ['etudiant', 'classe', 'montant_paye']
         # Vous pouvez personnaliser les widgets, les labels, etc. si nécessaire
+
+class RecuInscriptionForm(forms.ModelForm):
+    classe = forms.CharField(disabled=True)
+    cycle = forms.CharField(disabled=True)
+    filiere = forms.CharField(disabled=True)
+    eleve = forms.CharField(disabled=True)
+
+    class Meta:
+        model = RecuInscription
+        fields = ['classe', 'cycle', 'filiere', 'eleve', 'frais_inscription']
