@@ -81,8 +81,8 @@ def direct_general_ens_view(request):
 
 @login_required(login_url="/login/")  
 def daf_view(request):
-     html_template = loader.get_template('home/index.html')
-     return render(request,"home/index.html",context={})
+     html_template = loader.get_template('home/daf.html')
+     return render(request,"home/daf.html",context={})
 
 @login_required(login_url="/login/")  
 def daf_ens_view(request):

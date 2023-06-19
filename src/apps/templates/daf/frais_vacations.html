@@ -1,0 +1,51 @@
+{% extends 'layouts/base_projet.html' %}
+
+{% block stylesheets %}
+    <!-- Ajoutez ici vos liens vers les fichiers CSS spécifiques si nécessaire -->
+{% endblock stylesheets %}
+
+{% block content %}
+    <div class="pcoded-main-container">
+        <div class="pcoded-wrapper">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>Frais de vacations de l'enseignant {{ enseignant.first_name }} {{ enseignant.last_name }}</h5>
+                                            <p>Taux horaire : {{ taux_horaire }}</p>
+                                        </div>
+                                        <div class="card-body">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Matières enseignées</th>
+                                                        <th>Volume horaire</th>
+                                                        <th>Frais de vacations</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for matiere, volume_horaire, frais_vacation in frais_vacations %}
+                                                        <tr>
+                                                            <td>{{ matiere }}</td>
+                                                            <td>{{ volume_horaire }}</td>
+                                                            <td>{{ frais_vacation }}</td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p>Total des vacations : {{ total_vacations }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

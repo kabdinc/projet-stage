@@ -1,12 +1,13 @@
 
 from django.shortcuts import get_object_or_404, redirect, render
 from django.http import HttpResponseRedirect
+from django.urls import reverse
 from apps.inscription_frais.forms import EleveForm,PaiementForm,RecuInscriptionForm
-from apps.maquette.models import Etudiant, Cycle, Filiere, Classe
+from apps.maquette.models import AnneeAcademique, Etudiant, Cycle, Filiere, Classe
 from apps.inscription_frais.models import Paiement,RecuInscription
 from django.http import JsonResponse, HttpResponse
 
-from django.shortcuts import redirect
+
 
 def inscrire_eleve(request):
     form = EleveForm()
@@ -23,6 +24,51 @@ def inscrire_eleve(request):
             print(form.errors)
     
     return render(request, 'secretaire/inscrire_eleve.html', {'form': form})
+
+def selection_eleve(request):
+    etudiants = Etudiant.objects.all()
+    
+    if request.method == 'POST':
+        etudiant_id = request.POST.get('etudiant_id')
+        if etudiant_id:
+            return redirect('reinscrire_eleve', etudiant_id=etudiant_id)
+    
+    return render(request, 'secretaire/selection_eleve.html', {'etudiants': etudiants})
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from .forms import EleveForm
+from .models import Etudiant
+
+def reinscrire_eleve(request, etudiant_id=None):
+    if request.method == 'POST':
+        etudiant = Etudiant.objects.get(id=etudiant_id)
+        form = EleveForm(request.POST, instance=etudiant)
+        
+        if form.is_valid():
+            matricule = form.cleaned_data['matricule']
+            annee_academique = form.cleaned_data['AnneeAcademique']
+            classe = form.cleaned_data['classe']
+            
+            # Vérifier si l'étudiant est déjà inscrit dans cette année académique
+            if Etudiant.objects.filter(matricule=matricule, AnneeAcademique=annee_academique).exists():
+                messages.error(request, "Cet étudiant est déjà inscrit dans cette année académique.")
+                return redirect('reinscrire_eleve', etudiant_id=etudiant_id)
+            
+            etudiant = form.save(commit=False)
+            etudiant.id = None  # Crée un nouvel enregistrement d'étudiant
+            etudiant.annee_academique = annee_academique  # Nouvelle année académique
+            etudiant.classe = classe  # Nouvelle classe
+            etudiant.save()
+            
+            return redirect('recu_inscription', etudiant_id=etudiant.id)
+    else:
+        etudiant = Etudiant.objects.get(id=etudiant_id)
+        annees_academiques_existantes = Etudiant.objects.filter(matricule=etudiant.matricule).values_list('AnneeAcademique_id', flat=True)
+        form = EleveForm(instance=etudiant, initial={'classe': None})
+        form.fields['AnneeAcademique'].queryset = AnneeAcademique.objects.exclude(id__in=annees_academiques_existantes)
+    
+    return render(request, 'secretaire/reinscrire_eleve.html', {'form': form, 'etudiant_id': etudiant_id})
+
 
 
 def get_filiere(request):

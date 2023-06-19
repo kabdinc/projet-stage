@@ -1,0 +1,39 @@
+{% extends 'layouts/base_projet.html' %}
+
+{% block stylesheets %}
+    <!-- Ajoutez ici vos liens vers les fichiers CSS spécifiques si nécessaire -->
+{% endblock stylesheets %}
+
+{% block content %}
+    <div class="pcoded-main-container">
+        <div class="pcoded-wrapper">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>Modifier le taux horaire de {{ enseignant.first_name }} {{ enseignant.last_name }}</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <form method="post">
+                                                {% csrf_token %}
+                                                <div class="form-group">
+                                                    <label for="taux_horaire">Taux horaire</label>
+                                                    <input type="number" name="taux_horaire" id="taux_horaire" value="{{ enseignant.taux_horaire }}">
+                                                </div>
+                                                <button type="submit" class="btn btn-primary">Enregistrer</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

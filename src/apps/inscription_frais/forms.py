@@ -12,6 +12,12 @@ class EleveForm(forms.ModelForm):
     classe = forms.ModelChoiceField(queryset=Classe.objects.all(), widget=forms.Select(attrs={'id': 'classe', 'data-url': '/get_classe/', 'class': 'form-control'}))
     AnneeAcademique = forms.ModelChoiceField(queryset=AnneeAcademique.objects.all(), widget=forms.Select(attrs={'id': 'AneeAcademique', 'class': 'form-control'}))
     frais_inscription = forms.DecimalField(widget=forms.TextInput(attrs={'id': 'id_frais_inscription', 'class': 'form-control'}))
+    matricule = forms.CharField(widget=forms.TextInput(attrs={
+       'class': 'form-control',
+       'id': 'matricule',
+       'aria-describedby': 'matricule',
+       'placeholder': 'Entrer le matricule',
+    }))
     nom = forms.CharField(widget=forms.TextInput(attrs={
        'class': 'form-control',
        'id': 'nom',
@@ -36,7 +42,7 @@ class EleveForm(forms.ModelForm):
     
     class Meta:
         model = Etudiant
-        fields = ['prenoms', 'nom', 'date_naissance', 'classe', 'AnneeAcademique']
+        fields = ['matricule','prenoms', 'nom', 'date_naissance', 'classe', 'AnneeAcademique']
 
 
 

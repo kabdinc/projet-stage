@@ -16,8 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from apps.home.views import direct_etude_ens_view,direct_etude_view,comptable_ens_view,comptable_view,enseignant_view,administrateur_view,daf_ens_view,daf_view,direct_general_ens_view,direct_general_view,secretaire_ens_view,secretaire_view,double_role
-from apps.inscription_frais.views import inscrire_eleve,inscrire_eleve,get_classe,get_filiere,paiement,details_paiement,get_classe_details,get_frais_inscription,recu_inscription
-from apps.initial.views import parametrage,create_classe,create_cycle,create_etablissement,create_filiere,create_matiere,create_niveau_scolaire,create_unit_enseignement,update_classe,update_cycle,update_etablissement,update_filiere,update_matiere,update_niveau_scolaire,update_unit_enseignement,delete_classe,delete_cycle,delete_etablissement,delete_filiere,delete_matiere,delete_niveau_scolaire,delete_unit_enseignement,gestion_etablissement,gestion_cycle,gestion_filiere,gestion_classe,liste_etablissements,gestion_ue,gestion_matiere
+from apps.inscription_frais.views import inscrire_eleve,inscrire_eleve,get_classe,get_filiere,paiement,details_paiement,get_classe_details,get_frais_inscription,recu_inscription, reinscrire_eleve, selection_eleve
+from apps.initial.views import associer_matiere, delete_enseignant, modifier_enseignant, parametrage,create_classe,create_cycle,create_etablissement,create_filiere,create_matiere,create_niveau_scolaire,create_unit_enseignement,update_classe,update_cycle,update_etablissement,update_filiere,update_matiere,update_niveau_scolaire,update_unit_enseignement,delete_classe,delete_cycle,delete_etablissement,delete_filiere,delete_matiere,delete_niveau_scolaire,delete_unit_enseignement,gestion_etablissement,gestion_cycle,gestion_filiere,gestion_classe,liste_etablissements,gestion_ue,gestion_matiere,gestion_enseignant,creer_enseignant
+from apps.vacations.views import enseignant_per, enseignant_vac, frais_vacations, gestion_vacations, modifier_taux_horaire, totaux_vacations
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -41,6 +42,7 @@ urlpatterns = [
     path("secretaire/",secretaire_view, name="secretaire"),
     path("double_role",double_role ,name="double_role"),
     path("inscrire_eleve/",inscrire_eleve,name="inscrire_eleve"),
+    path("reinscrire_eleve/<int:etudiant_id>/",reinscrire_eleve,name="reinscrire_eleve"),
     path('get_filiere/', get_filiere, name='get_filiere'),
     path('get_classe/', get_classe, name='get_classe'),
     path('paiement/', paiement, name='paiement'),
@@ -49,7 +51,7 @@ urlpatterns = [
     path("apps.inscription_frais/",include("apps.inscription_frais.urls")),
     path('get_classe_details/', get_classe_details, name='details_classe'),
     path('recu_inscription/<int:etudiant_id>/', recu_inscription, name='recu_inscription'),
-
+    path('selection_eleve/', selection_eleve, name='selection_eleve'),
   
     path("parametrage/", parametrage, name="parametrage"), 
     path("creer_niveau/", create_niveau_scolaire, name="creer_niveau"), 
@@ -60,6 +62,7 @@ urlpatterns = [
     path("creer_etablissement/", create_etablissement, name="creer_etablissement"), 
     path("creer_ue/", create_unit_enseignement, name="creer_ue"),   
     path("creer_matiere/", create_matiere, name="creer_matiere"),
+    path("creer_enseignant/", creer_enseignant, name="creer_enseignant"),
     path("modifier_niveau/", update_niveau_scolaire, name="modifier_niveau"), 
     path("modifier_classe/", update_classe, name="modifier_classe"), 
     path("modifier_filiere/<int:filiere_id>/", update_filiere, name="modifier_filiere"), 
@@ -68,6 +71,7 @@ urlpatterns = [
     path("modifier_etablissement/<int:etablissement_id>/", update_etablissement, name="modifier_etablissement"), 
     path("modifier_ue/<int:unitenseignement_id>/", update_unit_enseignement, name="modifier_ue"),   
     path("modifier_matiere/<int:matiere_id>/", update_matiere, name="modifier_matiere"),
+    path("modifier_enseignant/<int:enseignant_id>/", modifier_enseignant, name="modifier_enseignant"),
     path("supprimer_niveau/", delete_niveau_scolaire, name="supprimer_niveau"), 
     path("supprimer_classe/<int:classe_id>/", delete_classe, name="supprimer_classe"), 
     path("supprimer_filiere/<int:filiere_id>/", delete_filiere, name="delete_filiere"), 
@@ -75,6 +79,7 @@ urlpatterns = [
     path("supprimer_etablissement/<int:etablissement_id>/", delete_etablissement, name="supprimer_etablissement"), 
     path("supprimer_ue/<int:unitenseignement_id>/", delete_unit_enseignement, name="supprimer_ue"),   
     path("supprimer_matiere/<int:matiere_id>/", delete_matiere, name="supprimer_matiere"),
+    path("supprimer_enseignant/<int:enseignant_id>/", delete_enseignant, name="supprimer_enseignant"),
     path("gestion_etablissement/", gestion_etablissement, name="gestion_etablissement"),
     path("gestion_cycle/", gestion_cycle, name="gestion_cycle"),
     path("gestion_filiere/", gestion_filiere, name="gestion_filiere"),
@@ -82,6 +87,15 @@ urlpatterns = [
     path("liste_etablissements/", liste_etablissements, name="liste_etablissements"),
     path("gestion_ue/", gestion_ue, name="gestion_ue"),
     path("gestion_matiere/", gestion_matiere, name="gestion_matiere"),
+    path("gestion_enseignant/", gestion_enseignant, name="gestion_enseignant"),
+    path("associer_matiere/<int:enseignant_id>/", associer_matiere, name="associer_matiere"),
+    
+    path('gestion_vacations/', gestion_vacations, name='gestion_vacations'),
+    path('enseignant_vac/', enseignant_vac, name='enseignant_vac'),
+    path('enseignant_per/', enseignant_per, name='enseignant_per'),
+    path('frais_vacations/<int:enseignant_id>', frais_vacations, name='frais_vacations'),
+    path('totaux_vacations/', totaux_vacations, name='totaux_vacations'),
+    path('modifier_taux_horaire/<int:enseignant_id>/', modifier_taux_horaire, name='modifier_taux_horaire'),
 
 
 
@@ -89,5 +103,6 @@ urlpatterns = [
     path("", include("apps.home.urls")),
     path("",include("apps.inscription_frais.urls") ),
     path("",include("apps.initial.urls") ),
+    path("",include("apps.vacations.urls") ),
    
 ]

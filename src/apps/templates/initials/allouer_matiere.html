@@ -1,0 +1,61 @@
+{% extends 'layouts/base_projet.html' %}
+
+{% block stylesheets %}
+    <!-- Ajoutez ici vos liens vers les fichiers CSS spécifiques si nécessaire -->
+{% endblock stylesheets %}
+
+{% block content %}
+    <div class="pcoded-main-container">
+        <div class="pcoded-wrapper">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>Allouer des matières à {{ enseignant.first_name }} {{ enseignant.last_name }}</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <h5>Choisissez les matières</h5>
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <form method="post" class="form_allouer_matiere">
+                                                        {% csrf_token %}
+                                                        <div class="form-group">
+                                                            <label for="{{ form.first_name.id_for_label }}">Prénom</label>
+                                                            {{ form.first_name }}
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="{{ form.last_name.id_for_label }}">Nom</label>
+                                                            {{ form.last_name }}
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="{{ form.matieres.id_for_label }}">Matières</label>
+                                                            {{ form.matieres }}
+                                                        </div>
+                                                        
+                                                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Ajoutez ici votre logique JavaScript si nécessaire
+        });
+    </script>
+{% endblock content %}

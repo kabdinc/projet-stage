@@ -1,0 +1,76 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Gestion des enseignants{% endblock %}
+
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+<!-- [ Main Content ] start -->
+<section class="pcoded-main-container">
+    <div class="pcoded-wrapper">
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <!-- [ breadcrumb ] start -->
+                <!-- ... Votre code existant ... -->
+                <!-- [ breadcrumb ] end -->
+                <div class="main-body">
+                    <div class="page-wrapper">
+                        <!-- [ Main Content ] start -->
+                        <div class="row">
+                            <!-- [ stiped-table ] start -->
+                            <div class="col-xl-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Enseignants</h5>
+                                        
+                                    </div>
+                                    <div class="card-block table-border-style">
+                                        <div class="table-responsive">
+                                            <div class="mb-3">
+                                                <a href="{% url 'creer_enseignant' %}" class="btn btn-primary">Ajouter</a>
+                                            </div>
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Nom</th>
+                                                        <th>Prénom</th>
+                                                        <th>Statut</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for enseignant in enseignants %}
+                                                    <tr>
+                                                        <th scope="row">{{ forloop.counter }}</th>
+                                                        <td>{{ enseignant.last_name }}</td>
+                                                        <td>{{ enseignant.first_name }}</td>
+                                                        <td>{{ enseignant.statut }}</td>
+                                                        <td>
+                                                            <a href="{% url 'modifier_enseignant' enseignant.id %}" class="btn btn-outline-primary">Modifier</a>
+                                                            <a href="{% url 'supprimer_enseignant' enseignant.id %}" class="btn btn-outline-danger">Supprimer</a>
+                                                            <a href="{% url 'associer_matiere' enseignant.id  %}" class="btn btn-outline-info">Allouer matière</a>
+                                                        </td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- [ stiped-table ] end -->
+                        </div>
+                        <!-- [ Main Content ] end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- [ Main Content ] end -->
+
+{% include 'includes/sidebar_de.html' %}
+{% endblock content %}
+
+{% block javascripts %}{% endblock javascripts %}

@@ -11,8 +11,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 #from sympy import total_degree 
-from .forms import LoginForm, SignUpForm
+from .forms import LoginForm, SignUpForm , EnseignantForm
 from apps.authentication.models import Type_user, Intervenant
+
 
 
 def login_view(request):

@@ -1,7 +1,11 @@
 
-from django.shortcuts import render, redirect
+import logging
+from django.forms import modelformset_factory
+from django.shortcuts import get_object_or_404, render, redirect
 from django.views.generic.edit import CreateView, UpdateView
 from django.urls import reverse_lazy
+from apps.authentication.forms import AllouerMatiereForm, EnseignantForm
+from apps.authentication.models import Intervenant
 from apps.maquette.models import Etablissement, AnneeAcademique, NiveauScolaire, Cycle, Filiere, Classe, UnitEnseignement, Matiere
 from .forms import EtablissementForm, AnneeAcademiqueForm, NiveauScolaireForm, CycleForm, FiliereForm, ClasseForm, UnitEnseignementForm, MatiereForm
 
@@ -245,4 +249,77 @@ def delete_matiere(request, matiere_id):
     matiere.delete()
     return redirect('parametrage')
 
+
+
+
+
+def gestion_enseignant(request):
+    enseignants = Intervenant.objects.filter(type_user__name='ENSEIGNANT')
+
+    context = {
+        'enseignants': enseignants
+    }
+    return render(request, 'initials/gestion_enseignant.html', context)
+
+
+logger = logging.getLogger(__name__)
+
+def creer_enseignant(request):
+    if request.method == 'POST':
+        form = EnseignantForm(request.POST)
+        if form.is_valid():
+            enseignant = form.save(commit=False)
+            type_user = form.cleaned_data['type_user']
+           
+            enseignant.save()
+            enseignant.type_user.add(type_user)  # Lie l'enseignant au type_user "ENSEIGNANT"
+           
+            return redirect('home')
+    else:
+        form = EnseignantForm()
+    return render(request, 'initials/creer_enseignant.html', {'form': form})
+
+
+
+def modifier_enseignant(request, enseignant_id):
+    enseignant = get_object_or_404(Intervenant, id=enseignant_id)
+
+    if request.method == 'POST':
+        form = EnseignantForm(request.POST, instance=enseignant)
+        if form.is_valid():
+            form.save()
+            return redirect('gestion_enseignant')
+    else:
+        form = EnseignantForm(instance=enseignant)
+
+    return render(request, 'initials/modifier_enseignant.html', {'form': form})
+
+def delete_enseignant(request, enseignant_id):
+    enseignant = get_object_or_404(Intervenant, id=enseignant_id)
+    enseignant.delete()
+    return redirect('gestion_enseignant')
+
+    
+def associer_matiere(request, enseignant_id):
+    enseignant = Intervenant.objects.get(id=enseignant_id)
+    
+    if request.method == 'POST':
+        form = AllouerMatiereForm(request.POST)
+        if form.is_valid():
+            matieres = form.cleaned_data['matieres']
+            enseignant.matieres.set(matieres)
+            enseignant.save()
+            return redirect('gestion_enseignant')
+    else:
+        initial_data = {
+            'first_name': enseignant.first_name,
+            'last_name': enseignant.last_name
+        }
+        form = AllouerMatiereForm(initial=initial_data)
+    
+    context = {
+        'form': form,
+        'enseignant': enseignant,
+    }
+    return render(request, 'initials/allouer_matiere.html', context)
 

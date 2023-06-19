@@ -1,5 +1,4 @@
 {% extends 'layouts/base_projet.html' %}
-
 {%load static%}
 
 {% block stylesheets %}
@@ -41,6 +40,8 @@
 
 {% endblock stylesheets %}
 {% block content %}
+
+
  <!-- [ navigation menu ] start -->
 
  <div class="collapse" id="navbarToggleExternalContent">
@@ -85,7 +86,7 @@
               </li>  
               <li data-username="Gestion des enseignants" 
                   class="nav-item {% if 'profile' in segment %} active {% endif %}">
-                  <a href="{% url 'paiement' %}" url='paiement' class="nav-link ">
+                  <a href="{% url 'gestion_enseignant' %}" url='gestion_enseignant' class="nav-link ">
                       <span class="pcoded-micon"><i class="feather icon-user"></i></span>
                           <span class="pcoded-mtext">Gestion des enseignants</span></a>
               </li>  

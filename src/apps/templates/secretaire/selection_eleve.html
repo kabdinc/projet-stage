@@ -1,0 +1,50 @@
+{% extends 'layouts/base_projet.html' %}
+
+{% block stylesheets %}
+<style>
+    /* styles spécifiques */
+</style>
+{% endblock stylesheets %}
+
+{% block content %}
+{% load static %}
+
+<div class="pcoded-main-container">
+    <div class="pcoded-wrapper">
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <div class="main-body">
+                    <div class="page-wrapper">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>SÉLECTION DE L'ÉLÈVE</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <form method="post" >
+                                            {% csrf_token %}
+                                            <div class="form-group">
+                                                <label for="etudiant_id">Sélectionnez l'élève à réinscrire :</label>
+                                                <select name="etudiant_id" id="etudiant_id" class="form-control">
+                                                    <option value="">-- Choisissez un étudiant --</option>
+                                                    {% for etudiant in etudiants %}
+                                                        <option value="{{ etudiant.id }}">{{ etudiant.prenoms }} {{ etudiant.nom }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Sélectionner</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'includes/sidebar_secretaire.html' %}
+{% endblock content %}

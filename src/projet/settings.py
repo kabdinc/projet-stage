@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'apps.maquette',
     'apps.inscription_frais',
     'apps.initial',
+    'apps.vacations',
 
 ]
 

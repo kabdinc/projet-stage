@@ -1,64 +1,101 @@
-{% extends "layouts/base_projet.html" %}
+{% extends 'layouts/base_projet.html' %}
+{%load static%}
 
-{% extends 'base.html' %}
+{% block stylesheets %}
+<style>
+    .c-brand {
+        margin-left:5px;
+        
+      }
+      .c-brand  {
+        -webkit-transform: rotateY(0deg);
+                transform: rotateY(0deg);
+        opacity: 1;
+      }
+      .c-brand {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+      }
+      .c-brand  {
+        background: linear-gradient(-135deg, #1de9b6 0%, #1dc4e9 100%);
+        border-radius: 10px;
+        width: 35px;
+        height: 35px;
+        display: -webkit-inline-box;
+        display: -ms-inline-flexbox;
+        display: inline-flex;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+      }
 
+</style>
+
+{% endblock stylesheets %}
 {% block content %}
-<h2>Welcome Finance Director!</h2>
 
-<div class="row">
-  <div class="col-md-4">
-    <h3>List of Students</h3>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Class</th>
-          <th>Tuition Fees Paid</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for student in students %}
-        <tr>
-          <td>{{ student.first_name }}</td>
-          <td>{{ student.last_name }}</td>
-          <td>{{ student.class_name }}</td>
-          <td>{{ student.tuition_fees_paid }}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+
+ <!-- [ navigation menu ] start -->
+
+ <div class="collapse" id="navbarToggleExternalContent">
+    <div class="bg-dark p-4">
+      <h5 class="text-white h4">Collapsed content</h5>
+      <span class="text-body-secondary">Toggleable via the navbar brand.</span>
+    </div>
   </div>
-  
-  <div class="col-md-4">
-    <h3>Modify Tuition Fees</h3>
-    <form method="post">
-      {% csrf_token %}
-      <div class="form-group">
-        <label for="sector">Sector</label>
-        <select name="sector_id" class="form-control" required>
-          {% for sector in sectors %}
-          <option value="{{ sector.id }}">{{ sector.name }}</option>
-          {% endfor %}
-        </select>
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </nav>
+<nav class="pcoded-navbar">
+  <div class="navbar-wrapper">
+      <div class="navbar-brand header-logo">
+          <img src="{% static 'assets\images\logo IAI.png'%}   " class="c-brand"  alt ="iailogo" />
+              <div class="b-bg">
+                  
+              </div>
+            <a href="{% url 'daf' %}" url='daf' class="nav-link "> <span class="b-title">Directeur Finances</span></a>
+          
+          <a class="mobile-menu" id="mobile-collapse" href="javascript:"><span></span></a>
       </div>
-      <div class="form-group">
-        <label for="class">Class</label>
-        <select name="class_id" class="form-control" required>
-          {% for c in classes %}
-          <option value="{{ c.id }}">{{ c.name }}</option>
-          {% endfor %}
-        </select>
+      <div class="navbar-content scroll-div">
+          <ul class="nav pcoded-inner-navbar">
+              <li class="nav-item pcoded-menu-caption">
+                  <label>Navigation</label>
+              </li>
+              <li data-username="Inscription Default Ecommerce CRM Analytics Crypto Project" 
+                  class="nav-item {% if 'index' in segment %} active {% endif %}">
+                  <a href="{% url 'parametrage' %}" url='parametrage' class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span
+                          class="pcoded-mtext">Gestion des frais d'inscription et de scolarité</span></a>
+              </li>
+              <li data-username="Gestion des notes" 
+                  class="nav-item {% if 'profile' in segment %} active {% endif %}">
+                  <a href="{% url 'gestion_vacations' %}" url='gestion_vacations' class="nav-link ">
+                      <span class="pcoded-micon"><i class="feather icon-user"></i></span>
+                          <span class="pcoded-mtext">Gestion des vacations</span></a>
+              </li>  
+              
+              <li data-username="Disabled Menu" class="nav-item">
+                <a href="{% url 'logout' %}" class="nav-link">
+                    <span class="pcoded-micon"><i class="feather icon-power"></i></span><span class="pcoded-mtext">Se deconnecter</span>
+                </a>
+            </li>
+             
+          </ul>
       </div>
-      <div class="form-group">
-        <label for="tuition_fees">Tuition Fees</label>
-        <input type="number" name="tuition_fees" class="form-control" required>
-      </div>
-      <button type="submit" class="btn btn-primary">Update Tuition Fees</button>
-    </form>
-    {% if form.errors %}
-    <div class="alert alert-danger
+  </div>
+</nav>
+<!-- [ navigation menu ] end -->
 
 
-<!-- Specific Page JS goes HERE  -->
-{% block javascripts %}{% endblock javascripts %}
+{% endblock %}

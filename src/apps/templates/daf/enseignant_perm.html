@@ -1,0 +1,57 @@
+{% extends 'layouts/base_projet.html' %}
+
+{% block stylesheets %}
+    <!-- Ajoutez ici vos liens vers les fichiers CSS spécifiques si nécessaire -->
+{% endblock stylesheets %}
+
+{% block content %}
+    <div class="pcoded-main-container">
+        <div class="pcoded-wrapper">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>Liste des enseignants permanents</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <form method="post">
+                                                {% csrf_token %}
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Prénom</th>
+                                                            <th>Nom</th>
+                                                            <th>Salaire actuel</th>
+                                                            <th>Nouveau salaire</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {% for enseignant in enseignants_per %}
+                                                            <tr>
+                                                                <td>{{ enseignant.first_name }}</td>
+                                                                <td>{{ enseignant.last_name }}</td>
+                                                                <td>{{ enseignant.salaire }}</td>
+                                                                <td>
+                                                                    <input type="number" name="salaire_{{ enseignant.id }}" value="{{ enseignant.salaire }}">
+                                                                </td>
+                                                            </tr>
+                                                        {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                                <button type="submit" class="btn btn-primary">Enregistrer</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

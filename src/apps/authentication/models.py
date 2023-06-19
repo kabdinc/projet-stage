@@ -2,11 +2,15 @@
 """
 Copyright (c) 2019 - present AppSeed.us
 """
+
 from pyexpat import model
 from typing import Any, Optional
 from django.contrib.auth.models import AbstractUser,UserManager
 from django.db import models 
 from django.urls import reverse
+from django.contrib.auth.hashers import make_password
+
+from apps.maquette.models import Classe, Matiere
 
 # Create your models here.
 
@@ -23,17 +27,22 @@ class Type_user(models.Model):
 
 
 # create de la classe intervenant qui hérite de la classe user
+
+
 class Intervenant(AbstractUser):
-   type_user = models.ManyToManyField(Type_user)
+    
+    STATUT_CHOICES = [
+        ('permanent', 'Permanent'),
+        ('vacataire', 'Vacataire'),
+    ]
+     
    
-  
-  
-class Manager(UserManager):
-    def create_user(self, username, password=None):
-        user = self.model()
-        user.set_password(password)
-        user.save()
-        return user
-    
-    
+     
+    statut = models.CharField(max_length=20, choices=STATUT_CHOICES, null=True, blank=True)    
+    type_user = models.ManyToManyField(Type_user)
+    taux_horaire = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    salaire = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    matieres = models.ManyToManyField(Matiere)
+    objects = UserManager()
+
 

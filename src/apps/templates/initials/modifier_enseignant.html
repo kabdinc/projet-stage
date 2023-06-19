@@ -1,0 +1,98 @@
+{% extends 'layouts/base_projet.html' %}
+
+{% block stylesheets %}
+<style>
+ 
+</style>
+{% endblock stylesheets %}
+
+{% block content %}
+{% load static %}
+
+<div class="pcoded-main-container">
+    <div class="pcoded-wrapper">
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <div class="main-body">
+                    <div class="page-wrapper">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Modification de l'enseignant</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <h5>Modifier les informations</h5>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <form method="post" class="form_creer_enseignant">
+                                                    {% csrf_token %}
+                                                    <div class="form-group">
+                                                        <label for="{{ form.first_name.id_for_label }}">Nom</label>
+                                                        {{ form.first_name }}
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="{{ form.last_name.id_for_label }}">Prenom</label>
+                                                        {{ form.last_name }}
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="{{ form.username.id_for_label }}">Nom d'utilisateur</label>
+                                                        {{ form.username }}
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="{{ form.email.id_for_label }}">Adresse e-mail</label>
+                                                        {{ form.email }}
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="{{ form.password1.id_for_label }}">Mot de passe</label>
+                                                        {{ form.password1 }}
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="{{ form.password2.id_for_label }}">Confirmation du mot de passe</label>
+                                                        {{ form.password2 }}
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="{{ form.type_user.id_for_label }}">Type d'utilisateur</label>
+                                                        {{ form.type_user }}
+                                                    </div>
+                                                  
+                                                    <div class="form-group">
+                                                        <label for="{{ form.Satut.id_for_label }}">Statut</label>
+                                                        {{ form.statut }}
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary">Créer</button>
+                                                </form>
+                                                {% if form.errors %}
+                                                <div class="alert alert-danger" role="alert">
+                                                    {% for field in form %}
+                                                        {% if field.errors %}
+                                                            <strong>{{ field.label }}</strong>
+                                                            {% for error in field.errors %}
+                                                                <p>{{ error }}</p>
+                                                            {% endfor %}
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </div>
+                                            {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Ajout de la logique JavaScript ici si nécessaire
+    });
+</script>
+
+{% endblock content %}

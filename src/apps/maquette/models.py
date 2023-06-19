@@ -2,10 +2,14 @@
 Copyright (c) 2019 - present AppSeed.us
 """
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User 
+
 
 class Etablissement(models.Model):
-    nom = models.CharField(max_length=100)
+    nom = models.CharField(max_length=100, null=True, blank=True)
+    code =models.CharField(max_length=100, null=True, blank=True)
+    site_web = models.CharField(max_length=50, null=True, blank=True)
+    Numero_telephone = models.CharField(max_length=20, null=True, blank=True)
     def __str__(self):
         return self.nom
     
@@ -32,7 +36,7 @@ class NiveauScolaire(models.Model):
     etablissement= models.ForeignKey(Etablissement, on_delete=models.SET_NULL, null=True)
     
 class Cycle(models.Model):
-    nom = models.CharField(max_length=100)
+    nom = models.CharField(max_length=150)
     code =models.CharField(max_length=15,null=True)
     etablissement= models.ForeignKey(Etablissement, on_delete=models.SET_NULL, null=True)
     def __str__(self):
@@ -43,7 +47,7 @@ class Cycle(models.Model):
    
    
 class Filiere(models.Model):
-    nom = models.CharField(max_length=100)
+    nom = models.CharField(max_length=150)
     code =models.CharField(max_length=15,null=True)
     cycle =models.ForeignKey(Cycle, on_delete=models.SET_NULL, null=True)
     AnneeAcademique = models.ForeignKey(AnneeAcademique,on_delete=models.SET_NULL,null=True)
@@ -58,8 +62,9 @@ class Filiere(models.Model):
 
     
 class Classe(models.Model):
-    nom = models.CharField(max_length=5)
+    nom = models.CharField(max_length=100)
     code =models.CharField(max_length=15 ,null=True)
+    niveau_classe = models.IntegerField(null=True, blank=True)
     filiere = models.ForeignKey(Filiere, on_delete=models.SET_NULL, null=True)
     AnneeAcademique = models.ForeignKey(AnneeAcademique,on_delete=models.SET_NULL,null=True)
     frais_scolarite = models.DecimalField(max_digits=10, decimal_places=2, null=True)
@@ -86,12 +91,20 @@ class UnitEnseignement(models.Model):
 
 class Matiere(models.Model):
     nom = models.CharField(max_length=10)
+    code =models.CharField(max_length=15,null=True)
     unit_ens = models.ForeignKey(UnitEnseignement, on_delete=models.SET_NULL, null=True) 
     coefficient = models.SmallIntegerField(null=True)
+    volume_horaire = models.IntegerField(null=True)
+   
+    def __str__(self):
+        return self.nom
+
+    
     
     
     
 class Etudiant(models.Model):
+    matricule = models.CharField(max_length=15,null=True)
     prenoms = models.CharField(max_length=50)
     nom = models.CharField(max_length=50)
     date_naissance = models.DateField(null=True)
