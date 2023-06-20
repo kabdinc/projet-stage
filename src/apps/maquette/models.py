@@ -108,13 +108,20 @@ class Etudiant(models.Model):
     prenoms = models.CharField(max_length=50)
     nom = models.CharField(max_length=50)
     date_naissance = models.DateField(null=True)
-    classe = models.ForeignKey(Classe, on_delete=models.SET_NULL, null=True)
-    AnneeAcademique = models.ForeignKey(AnneeAcademique,on_delete=models.SET_NULL,null=True)
+   
    
     def __str__(self):
         return self.prenoms + ' ' + self.nom
 
 
+class Inscription(models.Model):
+    etudiant = models.OneToOneField('Etudiant', on_delete=models.CASCADE)
+    classe = models.ForeignKey('Classe', on_delete=models.CASCADE)
+    annee_academique = models.ForeignKey('AnneeAcademique', on_delete=models.CASCADE)
+    date_inscription = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Inscription de {self.etudiant} en {self.classe} - {self.annee_academique}"
 
     
         

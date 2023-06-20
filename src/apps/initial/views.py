@@ -6,7 +6,7 @@ from django.views.generic.edit import CreateView, UpdateView
 from django.urls import reverse_lazy
 from apps.authentication.forms import AllouerMatiereForm, EnseignantForm
 from apps.authentication.models import Intervenant
-from apps.maquette.models import Etablissement, AnneeAcademique, NiveauScolaire, Cycle, Filiere, Classe, UnitEnseignement, Matiere
+from apps.maquette.models import Etablissement, AnneeAcademique, Etudiant, NiveauScolaire, Cycle, Filiere, Classe, UnitEnseignement, Matiere
 from .forms import EtablissementForm, AnneeAcademiqueForm, NiveauScolaireForm, CycleForm, FiliereForm, ClasseForm, UnitEnseignementForm, MatiereForm
 
 def parametrage(request):
@@ -323,3 +323,10 @@ def associer_matiere(request, enseignant_id):
     }
     return render(request, 'initials/allouer_matiere.html', context)
 
+def gestion_etudiants(request):
+    etudiants = Etudiant.objects.all()
+
+    context = {
+        'etudiants': etudiants
+    }
+    return render(request, 'initials/gestion_etudiants.html', context)

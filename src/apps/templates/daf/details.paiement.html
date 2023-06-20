@@ -1,4 +1,5 @@
 {% extends 'layouts/base_projet.html' %}
+
 {% block stylesheets %}
 <style>
     body {
@@ -75,20 +76,10 @@
 <div class="receipt">
     <div class="header">
         <img src="{% static 'assets\images\logo IAI.png' %}" class="logo" alt="Logo de l'école">
-        <h3 class="school-name">Institut Africain D'Informatique</h3>
+        <h3 class="school-name">Institut Africain d'Informatique</h3>
     </div>
 
-    <h3 class="receipt-title">Reçu d'inscription</h3>
-
-    <div class="information">
-        <span class="label">Classe:</span>
-        <span class="value">{{ inscription.classe }}</span>
-    </div>
-
-    <div class="information">
-        <span class="label">Filière:</span>
-        <span class="value">{{ inscription.classe.filiere }}</span>
-    </div>
+    <h3 class="receipt-title">Reçu de paiement</h3>
 
     <div class="information">
         <span class="label">Étudiant:</span>
@@ -96,8 +87,28 @@
     </div>
 
     <div class="information">
-        <span class="label">Frais d'inscription:</span>
-        <span class="value">{{ inscription.classe.frais_inscription }}</span>
+        <span class="label">Classe:</span>
+        <span class="value">{{ classe.nom }}</span>
+    </div>
+
+    <div class="information">
+        <span class="label">Frais de scolarité:</span>
+        <span class="value">{{ classe.frais_scolarite }}</span>
+    </div>
+
+    <div class="information">
+        <span class="label">Montant payé:</span>
+        <span class="value">{{ paiement.montant_paye }}</span>
+    </div>
+
+    <div class="information">
+        <span class="label">Total payé:</span>
+        <span class="value">{{ total_paye }}</span>
+    </div>
+
+    <div class="information">
+        <span class="label">Reste à payer:</span>
+        <span class="value">{{ reste_payer }}</span>
     </div>
 
     <div class="footer">
@@ -106,12 +117,6 @@
 
     <button class="print-button" onclick="window.print()">Imprimer</button>
 </div>
-
-<script>
-    function printReceipt() {
-        window.print();
-    }
-</script>
 
 {% include 'includes/sidebar_secretaire.html' %}
 {% endblock content %}

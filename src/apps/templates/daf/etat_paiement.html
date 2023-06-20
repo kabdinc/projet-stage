@@ -1,0 +1,51 @@
+<!-- templates/etudiant/etat_paiement.html -->
+{% extends "layouts/base.html" %}
+
+{% block title %}État de paiement{% endblock %}
+
+{% block content %}
+<section class="pcoded-main-container">
+    <div class="pcoded-wrapper">
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <div class="main-body">
+                    <div class="page-wrapper">
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>État de paiement de l'étudiant {{ etudiant.nom }}</h5>
+                                    </div>
+                                    <div class="card-block">
+                                        <p>Classe: {{ classe.nom }}</p>
+                                        <p>Frais de scolarité: {{ frais_scolarite }}</p>
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Paiements</th>
+                                                    <th>Date du paiement</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for paiement in paiements %}
+                                                <tr>
+                                                    <td>{{ paiement.montant_paye }}</td>
+                                                    <td>{{ paiement.date }}</td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                        <p>Total payé: {{ total_paye }}</p>
+                                        <p>Reste à payer: {{ reste_a_payer }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% include 'includes/sidebar_daf.html' %}
+{% endblock %}

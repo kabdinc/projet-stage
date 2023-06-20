@@ -1,0 +1,44 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Modifier les frais{% endblock %}
+
+{% block content %}
+<!-- [ Main Content ] start -->
+<section class="pcoded-main-container">
+    <div class="pcoded-wrapper">
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <!-- [ breadcrumb ] start -->
+                <!-- ... Votre code existant ... -->
+                <!-- [ breadcrumb ] end -->
+                <div class="main-body">
+                    <div class="page-wrapper">
+                        <!-- [ Main Content ] start -->
+                        <div class="row">
+                            <!-- [ general info ] start -->
+                            <div class="col-xl-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Modifier les frais de la classe {{ classe.nom }}</h5>
+                                    </div>
+                                    <div class="card-block">
+                                        <form method="POST" action="">
+                                            {% csrf_token %}
+                                            {{ form.as_p }}
+                                            <button type="submit" class="btn btn-primary">Enregistrer</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- [ general info ] end -->
+                        </div>
+                        <!-- [ Main Content ] end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% include 'includes/sidebar_daf.html' %}
+<!-- [ Main Content ] end -->
+{% endblock content %}

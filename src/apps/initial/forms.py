@@ -53,4 +53,4 @@ class MatiereForm(forms.ModelForm):
 class EtudiantForm(forms.ModelForm):
     class Meta:
         model = Etudiant
-        fields = ['prenoms', 'nom', 'date_naissance', 'classe', 'AnneeAcademique']
+        fields = ['prenoms', 'nom', 'date_naissance']

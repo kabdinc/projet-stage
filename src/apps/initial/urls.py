@@ -1,8 +1,9 @@
 from django.urls import path
-from apps.initial.views import parametrage,create_classe,create_cycle,create_etablissement,create_filiere,create_matiere,create_niveau_scolaire,create_unit_enseignement,update_classe,update_cycle,update_etablissement,update_filiere,update_matiere,update_niveau_scolaire,update_unit_enseignement,delete_classe,delete_cycle,delete_etablissement,delete_filiere,delete_matiere,delete_niveau_scolaire,delete_unit_enseignement
+from apps.initial.views import gestion_etudiants, parametrage,create_classe,create_cycle,create_etablissement,create_filiere,create_matiere,create_niveau_scolaire,create_unit_enseignement,update_classe,update_cycle,update_etablissement,update_filiere,update_matiere,update_niveau_scolaire,update_unit_enseignement,delete_classe,delete_cycle,delete_etablissement,delete_filiere,delete_matiere,delete_niveau_scolaire,delete_unit_enseignement
 
 urlpatterns = [
-   
+    
+    path("gestion_etudiants/",gestion_etudiants , name="gestion_etudiants"),
     path("creer_niveau/", create_niveau_scolaire, name="creer_niveau"), 
     path("creer_classe/", create_classe, name="creer_classe"), 
     path("creer_filiere/", create_filiere, name="creer_filiere"), 
@@ -17,7 +18,7 @@ urlpatterns = [
     path("modifier_cycle/<int:cycle_id>/", update_cycle, name="modifier_cycle"),
     path("modifier_classe/", update_classe, name="modifier_classe"),
     path("modifier_etablissement/", update_etablissement, name="modifier_etablissement"), 
-    path("modifierr_ue/", update_unit_enseignement, name="modifier_ue"),   
+    path("modifier_ue/", update_unit_enseignement, name="modifier_ue"),   
     path("modifier_matiere/", update_matiere, name="modifier_matiere"),
     path("supprimer_niveau/", delete_niveau_scolaire, name="supprimer_niveau"), 
     path("supprimer_classe/", delete_classe, name="supprimer_classe"), 

@@ -1,5 +1,5 @@
 from django import forms
-from apps.maquette.models import Cycle, Filiere, Classe,Etudiant,AnneeAcademique
+from apps.maquette.models import Cycle, Filiere, Classe,Etudiant,AnneeAcademique, Inscription
 from apps.inscription_frais.models import  Paiement ,RecuInscription
 
 
@@ -10,7 +10,7 @@ class EleveForm(forms.ModelForm):
     cycle = forms.ModelChoiceField(queryset=Cycle.objects.all(), widget=forms.Select(attrs={'id': 'cycle', 'class': 'form-control'}))
     filiere = forms.ModelChoiceField(queryset=Filiere.objects.all(), widget=forms.Select(attrs={'id': 'filiere', 'data-url': '/get_filiere/', 'class': 'form-control'}))
     classe = forms.ModelChoiceField(queryset=Classe.objects.all(), widget=forms.Select(attrs={'id': 'classe', 'data-url': '/get_classe/', 'class': 'form-control'}))
-    AnneeAcademique = forms.ModelChoiceField(queryset=AnneeAcademique.objects.all(), widget=forms.Select(attrs={'id': 'AneeAcademique', 'class': 'form-control'}))
+    annee_academique = forms.ModelChoiceField(queryset=AnneeAcademique.objects.all(), widget=forms.Select(attrs={'id': 'AneeAcademique', 'class': 'form-control'}))
     frais_inscription = forms.DecimalField(widget=forms.TextInput(attrs={'id': 'id_frais_inscription', 'class': 'form-control'}))
     matricule = forms.CharField(widget=forms.TextInput(attrs={
        'class': 'form-control',
@@ -41,8 +41,8 @@ class EleveForm(forms.ModelForm):
     }))
     
     class Meta:
-        model = Etudiant
-        fields = ['matricule','prenoms', 'nom', 'date_naissance', 'classe', 'AnneeAcademique']
+        model = Inscription
+        fields = ['matricule','prenoms', 'nom', 'date_naissance', 'classe', 'annee_academique']
 
 
 
@@ -82,3 +82,12 @@ class RecuInscriptionForm(forms.ModelForm):
     class Meta:
         model = RecuInscription
         fields = ['classe', 'cycle', 'filiere', 'eleve', 'frais_inscription']
+
+class FraisForm(forms.ModelForm):
+    class Meta:
+        model = Classe
+        fields = ['frais_inscription', 'frais_scolarite']
+        labels = {
+            'frais_inscription': 'Frais inscription',
+            'frais_scolarite': 'Frais de scolarité'
+        }

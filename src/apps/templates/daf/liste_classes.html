@@ -1,0 +1,63 @@
+{% extends "layouts/base_projet.html" %}
+
+{% block title %}Liste des classes{% endblock %}
+
+{% block content %}
+<!-- [ Main Content ] start -->
+<section class="pcoded-main-container">
+    <div class="pcoded-wrapper">
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <!-- [ breadcrumb ] start -->
+                <!-- ... Votre code existant ... -->
+                <!-- [ breadcrumb ] end -->
+                <div class="main-body">
+                    <div class="page-wrapper">
+                        <!-- [ Main Content ] start -->
+                        <div class="row">
+                            <!-- [ stiped-table ] start -->
+                            <div class="col-xl-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Classes</h5>
+                                    </div>
+                                    <div class="card-block table-border-style">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Classe</th>
+                                                        <th>Frais d'inscription</th>
+                                                        <th>Frais de scolarité</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for classe in classes %}
+                                                    <tr>
+                                                        <td>{{ classe.nom }}</td>
+                                                        <td>{{ classe.frais_inscription }}</td>
+                                                        <td>{{ classe.frais_scolarite }}</td>
+                                                        <td>
+                                                            <a href="{% url 'modifier_frais' classe.id %}" class="btn btn-outline-primary">Modifier</a>
+                                                        </td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- [ stiped-table ] end -->
+                        </div>
+                        <!-- [ Main Content ] end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% include 'includes/sidebar_daf.html' %}
+<!-- [ Main Content ] end -->
+{% endblock content %}

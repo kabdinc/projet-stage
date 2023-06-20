@@ -1,0 +1,110 @@
+{% extends 'layouts/base_projet.html' %}
+{% include 'includes/daf.html' %}
+
+
+{% block stylesheets %}
+<style>
+ 
+</style>
+
+{% endblock stylesheets %}
+
+{% block content %}
+{% load static %}
+
+
+
+
+    <!-- [ Main Content ] start -->
+    <div class="pcoded-main-container">
+      
+      <nav class="navbar navbar-dark bg-dark">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+          
+        
+      </div>
+     </nav>
+      
+        <div class="pcoded-wrapper">
+
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <!-- [ breadcrumb ] start -->
+
+                    <!-- [ breadcrumb ] end -->
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <!-- [ Main Content ] start -->
+                            <div class="row">
+                                <!--[ daily sales section ] start-->
+                                <div class="col-md-6 col-xl-6">
+                                    <div class="card daily-sales">
+                                        <div class="card-block">
+                                          <h6 class="mb-4">
+                                            <a href="{% url 'liste_classes' %}" class="nav-link">
+                                              <span class="b-title custom-text">Etabir les frais d'inscription et scolarité</span>
+                                            </a>
+                                          </h6>
+                                            
+                                            <div class="row d-flex align-items-center">
+                                                <div class="col-9">
+                                                   
+                                                </div>
+
+                                                <div class="col-3 text-right">
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="progress m-t-30" style="height: 7px;">
+                                                <div class="h-bar progress-c-theme" role="progressbar"
+                                                        style="width: 50%;" aria-valuenow="50" aria-valuemin="0"
+                                                        aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-xl-6">
+                                  <div class="card daily-sales">
+                                      <div class="card-block">
+                                        <h6 class="mb-4">
+                                          <a href="{% url 'liste_etudiant' %}" class="nav-link">
+                                            <span class="b-title custom-text">Etats de paiement des Etudiants</span>
+                                          </a>
+                                        </h6>
+                                          <div class="row d-flex align-items-center">
+                                              <div class="col-9">
+                                                 
+                                              </div>
+
+                                              <div class="col-3 text-right">
+                                                  
+                                              </div>
+                                          </div>
+                                          <div class="progress m-t-30" style="height: 7px;">
+                                              <div class="h-bar progress-c-theme" role="progressbar"
+                                                      style="width: 50%;" aria-valuenow="50" aria-valuemin="0"
+                                                      aria-valuemax="100"></div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                            </div>
+                            <!-- [ Main Content ] end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- [ Main Content ] end -->            
+
+
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
+
+{% include 'includes/sidebar_daf.html' %}
+{% endblock %}
