@@ -53,4 +53,7 @@ class MatiereForm(forms.ModelForm):
 class EtudiantForm(forms.ModelForm):
     class Meta:
         model = Etudiant
-        fields = ['prenoms', 'nom', 'date_naissance']
+        fields = ['matricule','prenoms', 'nom', 'date_naissance']
+        widgets = {
+            'date_naissance': forms.DateInput(attrs={'type': 'date'}),
+        }

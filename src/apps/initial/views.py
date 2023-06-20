@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 from apps.authentication.forms import AllouerMatiereForm, EnseignantForm
 from apps.authentication.models import Intervenant
 from apps.maquette.models import Etablissement, AnneeAcademique, Etudiant, NiveauScolaire, Cycle, Filiere, Classe, UnitEnseignement, Matiere
-from .forms import EtablissementForm, AnneeAcademiqueForm, NiveauScolaireForm, CycleForm, FiliereForm, ClasseForm, UnitEnseignementForm, MatiereForm
+from .forms import EtablissementForm, AnneeAcademiqueForm, EtudiantForm, NiveauScolaireForm, CycleForm, FiliereForm, ClasseForm, UnitEnseignementForm, MatiereForm
 
 def parametrage(request):
    
@@ -323,10 +323,44 @@ def associer_matiere(request, enseignant_id):
     }
     return render(request, 'initials/allouer_matiere.html', context)
 
-def gestion_etudiants(request):
-    etudiants = Etudiant.objects.all()
 
+def gestion_etudiant(request):
+    etudiants = Etudiant.objects.all()
     context = {
         'etudiants': etudiants
     }
-    return render(request, 'initials/gestion_etudiants.html', context)
+    return render(request, 'initials/gestion_etudiant.html', context)
+
+def modifier_etudiant(request, etudiant_id):
+    etudiant = get_object_or_404(Etudiant, id=etudiant_id)
+    
+    if request.method == 'POST':
+        form = EtudiantForm(request.POST, instance=etudiant)
+        if form.is_valid():
+            form.save()
+            return redirect('gestion_etudiant')
+    else:
+        form = EtudiantForm(instance=etudiant)
+    
+    return render(request, 'initials/modifier_etudiant.html', {'form': form, 'etudiant_id': etudiant_id})
+
+
+def modifier_etudiant(request, etudiant_id):
+    etudiant = get_object_or_404(Etudiant, id=etudiant_id)
+    
+    if request.method == 'POST':
+        form = EtudiantForm(request.POST, instance=etudiant)
+        if form.is_valid():
+            form.save()
+            return redirect('gestion_etudiant')
+    else:
+        form = EtudiantForm(instance=etudiant)
+    
+    return render(request, 'initials/modifier_etudiant.html', {'form': form, 'etudiant_id': etudiant_id})
+
+def supprimer_etudiant(request, etudiant_id):
+    etudiant = get_object_or_404(Etudiant, id=etudiant_id)
+    etudiant.delete()
+    return redirect('gestion_etudiant')
+    
+   

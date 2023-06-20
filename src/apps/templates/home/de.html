@@ -90,6 +90,12 @@
                       <span class="pcoded-micon"><i class="feather icon-user"></i></span>
                           <span class="pcoded-mtext">Gestion des enseignants</span></a>
               </li>  
+              <li data-username="Gestion des étudiants" 
+                  class="nav-item {% if 'profile' in segment %} active {% endif %}">
+                  <a href="{% url 'gestion_etudiant' %}" url='gestion_etudiant' class="nav-link ">
+                      <span class="pcoded-micon"><i class="feather icon-user"></i></span>
+                          <span class="pcoded-mtext">Gestion des etudiants</span></a>
+              </li> 
               <li data-username="Disabled Menu" class="nav-item">
                 <a href="{% url 'logout' %}" class="nav-link">
                     <span class="pcoded-micon"><i class="feather icon-power"></i></span><span class="pcoded-mtext">Se deconnecter</span>
