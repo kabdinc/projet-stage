@@ -1,4 +1,5 @@
 
+from pickle import NONE
 from django.shortcuts import get_object_or_404, redirect, render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -63,9 +64,9 @@ from django.contrib import messages
 from .forms import EleveForm, FraisForm
 from .models import Etudiant
 
-
 def reinscrire_eleve(request, etudiant_id=None):
     etudiant = get_object_or_404(Etudiant, id=etudiant_id)
+    inscription = None
     
     if request.method == 'POST':
         form = EleveForm(request.POST)
@@ -73,25 +74,29 @@ def reinscrire_eleve(request, etudiant_id=None):
             classe = form.cleaned_data['classe']
             annee_academique = form.cleaned_data['annee_academique']
             
-            # Mettre à jour l'inscription existante avec la nouvelle classe et l'année académique
-            inscription = get_object_or_404(Inscription, etudiant=etudiant)
-            inscription.classe = classe
-            inscription.annee_academique = annee_academique
-            inscription.save()
+            inscription = Inscription.objects.create(
+                etudiant=etudiant,
+                classe=classe,
+                annee_academique=annee_academique
+            )
             
             # Effectuer d'autres actions après la réinscription
             
-            return redirect('secretaire')
-    else:
-        initial_data = {
-            'matricule': etudiant.matricule,
-            'prenoms': etudiant.prenoms,
-            'nom': etudiant.nom,
-            'date_naissance': etudiant.date_naissance,
-            'classe': etudiant.inscription.classe,
-            'annee_academique': etudiant.inscription.annee_academique
-        }
-        form = EleveForm(initial=initial_data)
+            return redirect('recu_inscription', inscription_id=inscription.id)
+   
+        form = EleveForm()
+    
+    initial_data = {
+        'matricule': etudiant.matricule,
+        'prenoms': etudiant.prenoms,
+        'nom': etudiant.nom,
+        'date_naissance': etudiant.date_naissance,
+    }
+    if inscription is not None:
+        initial_data['classe'] = inscription.classe
+        initial_data['annee_academique'] = inscription.annee_academique
+    
+    form = EleveForm(initial=initial_data)
     
     return render(request, 'secretaire/reinscrire_eleve.html', {'form': form, 'etudiant_id': etudiant_id})
 

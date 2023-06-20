@@ -115,7 +115,7 @@ class Etudiant(models.Model):
 
 
 class Inscription(models.Model):
-    etudiant = models.OneToOneField('Etudiant', on_delete=models.CASCADE)
+    etudiant = models.ForeignKey('Etudiant', on_delete=models.CASCADE)
     classe = models.ForeignKey('Classe', on_delete=models.CASCADE)
     annee_academique = models.ForeignKey('AnneeAcademique', on_delete=models.CASCADE)
     date_inscription = models.DateTimeField(auto_now_add=True)

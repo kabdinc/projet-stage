@@ -91,3 +91,4 @@ class FraisForm(forms.ModelForm):
             'frais_inscription': 'Frais inscription',
             'frais_scolarite': 'Frais de scolarité'
         }
+        
