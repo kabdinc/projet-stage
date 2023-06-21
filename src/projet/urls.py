@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path,include
 from apps.home.views import direct_etude_ens_view,direct_etude_view,comptable_ens_view,comptable_view,enseignant_view,administrateur_view,daf_ens_view,daf_view,direct_general_ens_view,direct_general_view,secretaire_ens_view,secretaire_view,double_role
 from apps.inscription_frais.views import details_paiement, etat_paiement, gestion_inscription_frais, inscrire_eleve,inscrire_eleve,get_classe,get_filiere, liste_classes, liste_etudiant, modifier_frais,paiement,get_classe_details,get_frais_inscription,recu_inscription, reinscrire_eleve, selection_eleve
-from apps.initial.views import associer_matiere, delete_enseignant, gestion_etudiant, modifier_enseignant, modifier_etudiant, parametrage,create_classe,create_cycle,create_etablissement,create_filiere,create_matiere,create_niveau_scolaire,create_unit_enseignement, supprimer_etudiant,update_classe,update_cycle,update_etablissement,update_filiere,update_matiere,update_niveau_scolaire,update_unit_enseignement,delete_classe,delete_cycle,delete_etablissement,delete_filiere,delete_matiere,delete_niveau_scolaire,delete_unit_enseignement,gestion_etablissement,gestion_cycle,gestion_filiere,gestion_classe,liste_etablissements,gestion_ue,gestion_matiere,gestion_enseignant,creer_enseignant
+from apps.initial.views import associer_matiere, creer_annee, delete_enseignant, gestion_annee, gestion_etudiant, modifier_annee, modifier_enseignant, modifier_etudiant, parametrage,create_classe,create_cycle,create_etablissement,create_filiere,create_matiere,create_niveau_scolaire,create_unit_enseignement, supprimer_etudiant,update_classe,update_cycle,update_etablissement,update_filiere,update_matiere,update_niveau_scolaire,update_unit_enseignement,delete_classe,delete_cycle,delete_etablissement,delete_filiere,delete_matiere,delete_niveau_scolaire,delete_unit_enseignement,gestion_etablissement,gestion_cycle,gestion_filiere,gestion_classe,liste_etablissements,gestion_ue,gestion_matiere,gestion_enseignant,creer_enseignant
 from apps.vacations.views import enseignant_per, enseignant_vac, frais_vacations, gestion_vacations, modifier_taux_horaire, totaux_vacations
 
 urlpatterns = [
@@ -104,6 +104,10 @@ urlpatterns = [
     path('modifier_frais/<int:classe_id>', modifier_frais, name='modifier_frais'),
     path('liste_classes/', liste_classes, name='liste_classes'),
     path('gestion_inscription_frais/', gestion_inscription_frais, name='gestion_inscription_frais'),
+    path("gestion_annee/",gestion_annee , name="gestion_annee"),
+    path("creer_annee/",creer_annee  , name="creer_annee"),
+    path("modifier_annee/<int:AnneeAcademique_id>", modifier_annee, name="modifier_annee"), 
+   
 
 
 

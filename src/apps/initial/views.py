@@ -362,5 +362,40 @@ def supprimer_etudiant(request, etudiant_id):
     etudiant = get_object_or_404(Etudiant, id=etudiant_id)
     etudiant.delete()
     return redirect('gestion_etudiant')
-    
-   
+
+
+
+def gestion_annee(request):
+    AnneeAcademiques = AnneeAcademique.objects.all()
+    context = {
+        'AnneeAcademiques': AnneeAcademiques
+    }
+    return render(request, 'initials/gestion_annee.html', context)
+
+
+def creer_annee(request):
+    if request.method == 'POST':
+        form = AnneeAcademiqueForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('gestion_annee')
+    else:
+        form = AnneeAcademiqueForm()
+    return render(request, 'initials/creer_annee.html', {'form': form})
+
+def modifier_annee(request, AnneeAcademique_id):
+    annee = AnneeAcademique.objects.get(id=AnneeAcademique_id)
+    if request.method == 'POST':
+        form = AnneeAcademiqueForm(request.POST, instance=annee)
+        if form.is_valid():
+            form.save()
+            return redirect('gestion_annee')
+    else:
+        form = AnneeAcademiqueForm(instance=annee)
+    return render(request, 'initials/modifier_annee.html', {'form': form})
+
+def supprimer_annee(request,AnneeAcademique_id):
+    annee  = annee.objects.get(id=AnneeAcademique_id)
+    annee.delete()
+    return redirect('gestion_annee')
+
